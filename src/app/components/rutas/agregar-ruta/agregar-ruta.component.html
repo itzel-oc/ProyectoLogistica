@@ -1,0 +1,147 @@
+<h2>Agregar Nueva Ruta</h2>
+<form #rutaForm="ngForm" novalidate (ngSubmit)="onSubmit()">
+  {{ rutaForm.value | json }}
+  <hr />
+  {{ rutaForm.value | json }}
+  <div class="form-row">
+    <div class="form-group col-md-4">
+      <label for="nombre">Nombre</label>
+      <input
+        name="nombre"
+        [(ngModel)]="rutaModel.nombre"
+        type="text"
+        class="form-control"
+        id="nombre"
+        placeholder="Nombre"
+      />
+    </div>
+    <div class="form-group col-md-4">
+      <label for="cdOrigen">Ciudad Origen</label>
+      <input
+        name="cdOrigen"
+        [(ngModel)]="rutaModel.cdOrigen"
+        type="text"
+        class="form-control"
+        id="cdOrigen"
+        placeholder="Ciudad Origen"
+      />
+    </div>
+    <div class="form-group col-md-4">
+      <label for="edoOrigen">Estado Origen</label>
+      <input
+        name="edoOrigen"
+        [(ngModel)]="rutaModel.edoOrigen"
+        type="text"
+        class="form-control"
+        id="edoOrigen"
+        placeholder="Estado Origen"
+      />
+    </div>
+  </div>
+  <div class="form-group col-md-8">
+    <label for="paisOrigen">País Origen</label>
+    <select
+      name="paisOrigen"
+      [(ngModel)]="rutaModel.paisOrigen"
+      id="paisOrigen"
+      class="form-control"
+      name="paisOrigen"
+    >
+      <option value="Mexico">México</option>
+      <option value="USA"> USA</option>
+      <option value="Japon">Japón</option>
+      <option value="Canada"> Canada</option>
+    </select>
+  </div>
+  <div class="form-group col-md-4">
+    <label for="cdDestino">Ciudad Destino</label>
+    <input
+      name="cdDestino"
+      [(ngModel)]="rutaModel.cdDestino"
+      type="text"
+      class="form-control"
+      id="cdDestino"
+      placeholder="Ciudad Destino"
+    />
+  </div>
+  <div class="form-group col-md-4">
+    <label for="edoDestino">Estado Destino</label>
+    <select
+      name="edoDestino"
+      id="edoDestino"
+      class="form-control"
+      name="edoDestino"
+      [(ngModel)]="rutaModel.edoDestino"
+    >
+      <option selected>Elige...</option>
+      <option value="0">Todo México</option>
+      <option value="1">Aguascalientes</option>
+      <option value="2">Baja California</option>
+      <option value="3">Baja California Sur</option>
+      <option value="4">Campeche</option>
+      <option value="5">Coahuila de Zaragoza</option>
+      <option value="6">Colima</option>
+      <option value="7">Chiapas</option>
+      <option value="8">Chihuahua</option>
+      <option value="9">Distrito Federal</option>
+      <option value="10">Durango</option>
+      <option value="11">Guanajuato</option>
+      <option value="12">Guerrero</option>
+      <option value="13">Hidalgo</option>
+      <option value="14">Jalisco</option>
+      <option value="15">México</option>
+      <option value="16">Michoacán de Ocampo</option>
+      <option value="17">Morelos</option>
+      <option value="18">Nayarit</option>
+      <option value="19">Nuevo León</option>
+      <option value="20">Oaxaca</option>
+      <option value="21">Puebla</option>
+      <option value="22">Querétaro</option>
+      <option value="23">Quintana Roo</option>
+      <option value="24">San Luis Potosí</option>
+      <option value="25">Sinaloa</option>
+      <option value="26">Sonora</option>
+      <option value="27">Tabasco</option>
+      <option value="28">Tamaulipas</option>
+      <option value="29">Tlaxcala</option>
+      <option value="30">Veracruz</option>
+      <option value="31">Yucatán</option>
+      <option value="32">Zacatecas</option>
+    </select>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="paisDestino">País Destino</label>
+      <select
+        name="paisDestino"
+        id="paisDestino"
+        class="form-control"
+        name="paisDestino"
+        [(ngModel)]="rutaModel.paisDestino"
+      >
+        <option value="Mexico">México</option>
+        <option value="USA"> USA</option>
+        <option value="Japon">Japón</option>
+        <option value="Canada"> Canada</option>
+      </select>
+    </div>
+    <div class="form-group col-md-2">
+      <label for="CP">CP Destino</label>
+      <input
+        tname="CPDestino"
+        [(ngModel)]="rutaModel.CPDestino"
+        type="text"
+        class="form-control"
+        id="CPDestino"
+        placeholder="CP Destino"
+      />
+    </div>
+  </div>
+  <button
+    type="submit"
+    class="btn btn-primary"
+    (click)="edit ? updateRuta() : insertRuta()"
+  >
+    Guardar
+  </button>
+</form>

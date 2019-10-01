@@ -1,0 +1,265 @@
+<h2>Alta Cliente</h2>
+<form #clienteForm="ngForm" novalidate (ngSubmit)="onSubmit()">
+  {{ clienteForm.value | json }}
+  <hr />
+  {{ clienteModel.value | json }}
+  <div class="form-row">
+    <div class="form-group col-md-8">
+      <label for="nombre">Nombre</label>
+      <input
+        name="nombre"
+        [(ngModel)]="clienteModel.nombre"
+        type="text"
+        class="form-control"
+        id="nombre"
+        placeholder="Nombre"
+      />
+    </div>
+    <div class="form-group col-md-4">
+      <label for="RFC">RFC</label>
+      <input
+        name="RFC"
+        [(ngModel)]="clienteModel.RFC"
+        type="text"
+        class="form-control"
+        id="RFC"
+        placeholder="RFC"
+      />
+    </div>
+    <div class="form-group col-md-4">
+      <label for="contacto">Contacto Principal</label>
+      <input
+        name="contacto"
+        [(ngModel)]="clienteModel.contacto"
+        type="text"
+        class="form-control"
+        id="contacto"
+        placeholder="Contacto"
+      />
+    </div>
+    <div class="form-group col-md-4">
+      <label for="email">Email</label>
+      <input
+        name="email"
+        [(ngModel)]="clienteModel.email"
+        type="email"
+        class="form-control"
+        id="email"
+        placeholder="Email"
+      />
+    </div>
+    <div class="form-group col-md-4">
+      <label for="telefono">Teléfono</label>
+      <input
+        name="telefono"
+        [(ngModel)]="clienteModel.telefono"
+        type="telefono"
+        class="form-control"
+        id="telefono"
+        placeholder="Teléfono"
+      />
+    </div>
+  </div>
+  <div class="form-group col-md-8">
+    <label for="direccion">Dirección</label>
+    <input
+      name="direccion"
+      [(ngModel)]="clienteModel.direccion"
+      type="text"
+      class="form-control"
+      id="direccion"
+      placeholder="1234 Main St"
+    />
+  </div>
+  <div class="form-group col-md-4">
+    <label for="ciudad">Ciudad</label>
+    <input
+      name="ciudad"
+      [(ngModel)]="clienteModel.ciudad"
+      type="text"
+      class="form-control"
+      id="ciudad"
+      placeholder="Ciudad"
+    />
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-4">
+      <label for="estado">Estado</label>
+      <select
+        id="estado"
+        class="form-control"
+        name="estado"
+        [(ngModel)]="clienteModel.estado"
+      >
+        <option selected>Elige...</option>
+        <option value="Aguascalientes">Aguascalientes</option>
+        <option value="Baja California">Baja California</option>
+        <option value="Baja California Sur">Baja California Sur</option>
+        <option value="Campeche">Campeche</option>
+        <option value="Coahuila">Coahuila</option>
+        <option value="Colima">Colima</option>
+        <option value="Chiapas">Chiapas</option>
+        <option value="Chihuahua">Chihuahua</option>
+        <option value="CDMX">CDMX</option>
+        <option value="Durango">Durango</option>
+        <option value="Guanajuato">Guanajuato</option>
+        <option value="Guerrero">Guerrero</option>
+        <option value="Hidalgo">Hidalgo</option>
+        <option value="Jalisco">Jalisco</option>
+        <option value="Michoacan">Michoacán</option>
+        <option value="Morelos">Morelos</option>
+        <option value="Nayarit">Nayarit</option>
+        <option value="Nuevo Leon">Nuevo León</option>
+        <option value="Oaxaca">Oaxaca</option>
+        <option value="Puebla">Puebla</option>
+        <option value="Querétaro">Querétaro</option>
+        <option value="Quintana Roo">Quintana Roo</option>
+        <option value="San Luis Potosi">San Luis Potosí</option>
+        <option value="Sinaloa">Sinaloa</option>
+        <option value="Sonora">Sonora</option>
+        <option value="Tabasco">Tabasco</option>
+        <option value="Tamaulipas">Tamaulipas</option>
+        <option value="Tlaxcala">Tlaxcala</option>
+        <option value="Veracruz">Veracruz</option>
+        <option value="Yucatan">Yucatán</option>
+        <option value="Zacatecas">Zacatecas</option>
+      </select>
+    </div>
+    <div class="form-group col-md-2">
+      <label for="CP">CP</label>
+      <input
+        type="text"
+        class="form-control"
+        id="CP"
+        name="CP"
+        [(ngModel)]="clienteModel.CP"
+      />
+    </div>
+    <div class="form-group col-md-6">
+      <label for="estado">País</label>
+      <select
+        id="pais"
+        class="form-control"
+        name="pais"
+        [(ngModel)]="clienteModel.pais"
+      >
+        <option selected>Elige...</option>
+        <option value="México">México</option>
+        <option value="USA">USA</option>
+        <option value="Canada">Canada</option>
+        <option value="Japon">Japón</option>
+      </select>
+    </div>
+    <div class="form-group col-md-6">
+      <label for="diasCredito">Días de Crédito</label>
+      <input
+        name="diasCredito"
+        [(ngModel)]="clienteModel.diasCredito"
+        type="text"
+        class="form-control"
+        id="diasCredito"
+        placeholder="0"
+      />
+    </div>
+    <div class="form-group col-md-6">
+      <label for="limiteCredito">Límite de Crédito</label>
+      <input
+        name="limiteCredito"
+        [(ngModel)]="clienteModel.limiteCredito"
+        type="text"
+        class="form-control"
+        id="limiteCredito"
+        placeholder="0"
+      />
+    </div>
+  </div>
+  <button (click)="toggle()" id="bt" class="btn btn-warning">
+    Agregar Datos Bancarios
+  </button>
+  <br />
+
+  <ng-container *ngIf="show">
+    <h3>Datos Bancarios</h3>
+    <div class="form-row">
+      <div class="form-group col-md-8">
+        <label for="nombre">Nombre Banco</label>
+        <input
+          type="text"
+          class="form-control"
+          id="nombre"
+          placeholder="Nombre"
+        />
+      </div>
+      <div class="form-group col-md-4">
+        <label for="email">Número de Cuenta</label>
+        <input
+          type="email"
+          class="form-control"
+          id="email"
+          placeholder="Email"
+        />
+      </div>
+      <div class="form-group col-md-4">
+        <label for="telefono">CLABE</label>
+        <input
+          type="telefono"
+          class="form-control"
+          id="telefono"
+          placeholder="Teléfono"
+        />
+      </div>
+      <div class="form-group col-md-4">
+        <label for="telefono">ABA</label>
+        <input
+          type="telefono"
+          class="form-control"
+          id="telefono"
+          placeholder="Teléfono"
+        />
+      </div>
+      <div class="form-group col-md-4">
+        <label for="telefono">SWIFT</label>
+        <input
+          type="telefono"
+          class="form-control"
+          id="telefono"
+          placeholder="Teléfono"
+        />
+      </div>
+      <div class="form-group col-md-4">
+        <label for="direccion">Dirección</label>
+        <input
+          type="text"
+          class="form-control"
+          id="direccion"
+          placeholder="1234 Main St"
+        />
+      </div>
+      <div class="form-group col-md-4">
+        <label for="direccion">Ciudad</label>
+        <input
+          type="text"
+          class="form-control"
+          id="direccion"
+          placeholder="1234 Main St"
+        />
+      </div>
+      <div class="form-group col-md-4">
+        <label for="direccion">Estado</label>
+        <input
+          type="text"
+          class="form-control"
+          id="direccion"
+          placeholder="1234 Main St"
+        />
+      </div>
+    </div>
+  </ng-container>
+  <button
+    type="submit"
+    class="btn btn-primary"
+    (click)="edit ? updateCliente() : insertCliente()"
+  >
+    Guardar
+  </button>
+</form>

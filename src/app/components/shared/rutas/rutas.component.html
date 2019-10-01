@@ -1,0 +1,46 @@
+<h2>Rutas</h2>
+<div class="table-responsive">
+  <table class="table table-striped table-bordered" style="width:100%">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">#ID</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Ciudad Origen</th>
+        <th scope="col">Estado Origen</th>
+        <th scope="col">Pais Origen</th>
+        <th scope="col">Ciudad Destino</th>
+        <th scope="col">Estado Destino</th>
+        <th scope="col">Pais Destino</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let ruta of rutas">
+        <td>{{ ruta.idRuta }}</td>
+        <td>{{ ruta.nombre }}</td>
+        <td>{{ ruta.cdOrigen }}</td>
+        <td>{{ ruta.edoOrigen }}</td>
+        <td>{{ ruta.paisOrigen }}</td>
+        <td>{{ ruta.cdDestino }}</td>
+        <td>{{ ruta.edoDestino }}</td>
+        <td>{{ ruta.paisDestino }}</td>
+
+        <button
+          [routerLink]="['rutas/editar', ruta.idRuta]"
+          class="btn btn-info"
+        >
+          <i class="glyphicon glyphicon-edit"></i>
+        </button>
+        <button
+          onclick="return confirm('¿Deseas Eliminar esta Ruta?');"
+          class="btn btn-danger"
+          (click)="deleteRuta(ruta.idRuta)"
+        >
+          <i class="glyphicon glyphicon-trash"></i>
+        </button>
+      </tr>
+    </tbody>
+  </table>
+  <button class="btn btn-primary" (click)="router.navigate(['/agregarRuta'])">
+    Agregar
+  </button>
+</div>
