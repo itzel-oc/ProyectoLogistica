@@ -15,6 +15,8 @@ import { AgregarClienteComponent } from "./components/clientes/agregar-cliente/a
 import { RutasComponent } from "./components/shared/rutas/rutas.component";
 import { AgregarRutaComponent } from "./components/rutas/agregar-ruta/agregar-ruta.component";
 import { InfoClienteComponent } from "./components/clientes/info-cliente/info-cliente.component";
+import { LadaPipe } from './pipes/lada.pipe';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -28,9 +30,16 @@ import { InfoClienteComponent } from "./components/clientes/info-cliente/info-cl
     AgregarClienteComponent,
     RutasComponent,
     AgregarRutaComponent,
-    InfoClienteComponent
+    InfoClienteComponent,
+    LadaPipe
   ],
-  imports: [BrowserModule, HttpClientModule, AppRoutingModule, FormsModule],
+  imports: [
+    BrowserModule,
+    HttpClientModule,
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })

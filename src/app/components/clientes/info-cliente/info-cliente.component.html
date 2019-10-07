@@ -1,25 +1,48 @@
 <hr />
-<h3 [routerLink]="['/clientes']">Datos del Cliente</h3>
+<h3><button [routerLink]="['/clientes']" class="btn btn-primary"><i class="fa fa-arrow-left"></i></button> Datos del
+  Cliente</h3>
 <hr />
-<h4 class="titulo">Nombre:</h4>
-<h4>{{ cliente.nombre }}</h4>
-<h4 class="titulo">RFC:</h4>
-<h4>{{ cliente.RFC }}</h4>
-<h4 class="titulo">Contacto Principal:</h4>
-<h4>{{ cliente.contacto }}</h4>
-<h4 class="titulo">Email:</h4>
-<h4>{{ cliente.email }}</h4>
-<h4 class="titulo">Telefono:</h4>
-<h4>{{ cliente.telefono }}</h4>
-<h4 class="titulo">Direccion:</h4>
-<h4>{{ cliente.direccion }}</h4>
-<h4 class="titulo">Ciudad:</h4>
-<h4>{{ cliente.ciudad }}</h4>
-<h4 class="titulo">Estado:</h4>
-<h4>{{ cliente.estado }}</h4>
-<h4 class="titulo">País:</h4>
-<h4>{{ cliente.pais }}</h4>
-<h4 class="titulo">Días de Credito:</h4>
-<h4>{{ cliente.diasCredito }}</h4>
-<h4 class="titulo">Limite de Credito:</h4>
-<h4>{{ cliente.limiteCredito }}</h4>
+<div class="view-flex">
+  <p class="titulo">Nombre:</p>
+  <p class="ml">{{ cliente.nombre }}</p>
+</div>
+<div class="view-flex">
+  <p class="titulo">RFC:</p>
+  <p class="ml">{{ cliente.RFC }}</p>
+</div>
+<div class="view-flex">
+  <p class="titulo">Contacto Principal:</p>
+  <p class="ml">{{ cliente.contacto }}</p>
+</div>
+<div class="view-flex">
+  <p class="titulo">Email:</p>
+  <p class="ml">{{ cliente.email }}</p>
+</div>
+<div class="view-flex">
+  <p class="titulo">Telefono:</p>
+  <p class="ml">{{ cliente.telefono | lada: cliente.pais}}</p>
+</div>
+<div class="view-flex">
+  <p class="titulo">Direccion:</p>
+  <p class="ml">{{ cliente.direccion }}</p>
+</div>
+<div class="view-flex">
+  <p class="titulo">Ciudad:</p>
+  <p class="ml">{{ cliente.ciudad }}</p>
+</div>
+<div class="view-flex">
+  <p class="titulo">Estado:</p>
+  <p class="ml">{{ cliente.estado }}</p>
+</div>
+<div class="view-flex">
+  <p class="titulo">País:</p>
+  <p class="ml">{{ cliente.pais }}</p>
+</div>
+<div class="view-flex">
+  <p class="titulo">Días de Credito:</p>
+  <p class="ml">{{ cliente.diasCredito }}</p>
+</div>
+<div class="view-flex">
+  <p class="titulo">Limite de Credito:</p>
+  <p class="ml">{{ cliente.limiteCredito | currency }}</p>
+</div>

@@ -19,7 +19,6 @@ export class InfoClienteComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      console.log("params = ", params);
       this._clientesService.getCliente(params["idCliente"]).subscribe(res => {
         this.cliente = res;
       });

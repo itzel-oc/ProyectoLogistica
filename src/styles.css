@@ -1,1 +1,28 @@
 /* You can add global styles to this file, and also import other style files */
+.mb {
+    margin-bottom: 1rem;
+}
+
+.ml {
+    margin-left: 1rem;
+}
+
+.mr {
+    margin-right: 1rem;
+}
+
+.mt {
+    margin-top: 1rem;
+}
+
+.flex {
+    display: flex;
+}
+
+.grey {
+    color: grey;
+}
+
+.fontSize16 {
+    font-size: 16px;
+}

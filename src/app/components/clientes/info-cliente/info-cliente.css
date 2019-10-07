@@ -1,3 +1,7 @@
 .titulo{
     font-weight: bold;
 }
+
+.view-flex {
+    display: flex;
+}

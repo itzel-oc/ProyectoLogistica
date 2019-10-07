@@ -16,7 +16,7 @@ export class ClientesComponent implements OnInit {
     private _clientesService: ClientesService,
     private router: Router,
     private route: ActivatedRoute
-  ) {}
+  ) { }
 
   goToPage(pageName: string) {
     this.router.navigate([`${pageName}`]);
@@ -38,7 +38,6 @@ export class ClientesComponent implements OnInit {
   }
 
   deleteCliente(idCliente) {
-    console.log(idCliente);
     this._clientesService.deleteCliente(idCliente).subscribe(() => {
       this.fetchData();
     });
@@ -47,7 +46,7 @@ export class ClientesComponent implements OnInit {
   ngOnInit() {
     this._clientesService
       .getAllClientes()
-      .subscribe(data => (this.clientes = data));
+      .subscribe(data => this.clientes = data);
 
     this.route.params.subscribe(params => {
       this._clientesService.getCliente(params["idCliente"]).subscribe(res => {

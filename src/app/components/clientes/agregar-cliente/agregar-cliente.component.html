@@ -1,149 +1,39 @@
-<h2>Alta Cliente</h2>
-<form #clienteForm="ngForm" novalidate (ngSubmit)="onSubmit()">
-  {{ clienteForm.value | json }}
+<h2 class="ml"> <button routerLink="/clientes" class="btn btn-primary mr">
+    <i class="fa fa-arrow-left"></i>
+  </button> {{edit ? 'Editar Cliente' : 'Alta Cliente'}}</h2>
+<form #clienteForm="ngForm" [formGroup]="addCliente" novalidate (ngSubmit)="onSubmit()">
   <hr />
-  {{ clienteModel.value | json }}
   <div class="form-row">
     <div class="form-group col-md-8">
       <label for="nombre">Nombre</label>
-      <input
-        name="nombre"
-        [(ngModel)]="clienteModel.nombre"
-        type="text"
-        class="form-control"
-        id="nombre"
-        placeholder="Nombre"
-      />
+      <input name="nombre" formControlName="nombre" type="text" class="form-control" id="nombre" placeholder="Nombre" />
+      <p *ngIf="submitted && addCliente.controls['nombre'].errors?.required" class="alert alert-danger opacity"
+        role="alert">nombre no puede estar vacio</p>
     </div>
     <div class="form-group col-md-4">
       <label for="RFC">RFC</label>
-      <input
-        name="RFC"
-        [(ngModel)]="clienteModel.RFC"
-        type="text"
-        class="form-control"
-        id="RFC"
-        placeholder="RFC"
-      />
+      <input name="RFC" formControlName="RFC" type="text" class="form-control" id="RFC" placeholder="RFC" />
     </div>
     <div class="form-group col-md-4">
       <label for="contacto">Contacto Principal</label>
-      <input
-        name="contacto"
-        [(ngModel)]="clienteModel.contacto"
-        type="text"
-        class="form-control"
-        id="contacto"
-        placeholder="Contacto"
-      />
+      <input name="contacto" formControlName="contacto" type="text" class="form-control" id="contacto"
+        placeholder="Contacto" />
     </div>
     <div class="form-group col-md-4">
       <label for="email">Email</label>
-      <input
-        name="email"
-        [(ngModel)]="clienteModel.email"
-        type="email"
-        class="form-control"
-        id="email"
-        placeholder="Email"
-      />
+      <input name="email" formControlName="email" type="email" class="form-control" id="email" placeholder="Email" />
     </div>
     <div class="form-group col-md-4">
       <label for="telefono">Teléfono</label>
-      <input
-        name="telefono"
-        [(ngModel)]="clienteModel.telefono"
-        type="telefono"
-        class="form-control"
-        id="telefono"
-        placeholder="Teléfono"
-      />
+      <input name="telefono" formControlName="telefono" type="telefono" class="form-control" id="telefono"
+        placeholder="Teléfono" />
     </div>
-  </div>
-  <div class="form-group col-md-8">
-    <label for="direccion">Dirección</label>
-    <input
-      name="direccion"
-      [(ngModel)]="clienteModel.direccion"
-      type="text"
-      class="form-control"
-      id="direccion"
-      placeholder="1234 Main St"
-    />
-  </div>
-  <div class="form-group col-md-4">
-    <label for="ciudad">Ciudad</label>
-    <input
-      name="ciudad"
-      [(ngModel)]="clienteModel.ciudad"
-      type="text"
-      class="form-control"
-      id="ciudad"
-      placeholder="Ciudad"
-    />
   </div>
   <div class="form-row">
-    <div class="form-group col-md-4">
-      <label for="estado">Estado</label>
-      <select
-        id="estado"
-        class="form-control"
-        name="estado"
-        [(ngModel)]="clienteModel.estado"
-      >
-        <option selected>Elige...</option>
-        <option value="Aguascalientes">Aguascalientes</option>
-        <option value="Baja California">Baja California</option>
-        <option value="Baja California Sur">Baja California Sur</option>
-        <option value="Campeche">Campeche</option>
-        <option value="Coahuila">Coahuila</option>
-        <option value="Colima">Colima</option>
-        <option value="Chiapas">Chiapas</option>
-        <option value="Chihuahua">Chihuahua</option>
-        <option value="CDMX">CDMX</option>
-        <option value="Durango">Durango</option>
-        <option value="Guanajuato">Guanajuato</option>
-        <option value="Guerrero">Guerrero</option>
-        <option value="Hidalgo">Hidalgo</option>
-        <option value="Jalisco">Jalisco</option>
-        <option value="Michoacan">Michoacán</option>
-        <option value="Morelos">Morelos</option>
-        <option value="Nayarit">Nayarit</option>
-        <option value="Nuevo Leon">Nuevo León</option>
-        <option value="Oaxaca">Oaxaca</option>
-        <option value="Puebla">Puebla</option>
-        <option value="Querétaro">Querétaro</option>
-        <option value="Quintana Roo">Quintana Roo</option>
-        <option value="San Luis Potosi">San Luis Potosí</option>
-        <option value="Sinaloa">Sinaloa</option>
-        <option value="Sonora">Sonora</option>
-        <option value="Tabasco">Tabasco</option>
-        <option value="Tamaulipas">Tamaulipas</option>
-        <option value="Tlaxcala">Tlaxcala</option>
-        <option value="Veracruz">Veracruz</option>
-        <option value="Yucatan">Yucatán</option>
-        <option value="Zacatecas">Zacatecas</option>
-      </select>
-    </div>
-    <div class="form-group col-md-2">
-      <label for="CP">CP</label>
-      <input
-        type="text"
-        class="form-control"
-        id="CP"
-        name="CP"
-        [(ngModel)]="clienteModel.CP"
-      />
-    </div>
     <div class="form-group col-md-6">
       <label for="estado">País</label>
-      <select
-        id="pais"
-        class="form-control"
-        name="pais"
-        [(ngModel)]="clienteModel.pais"
-      >
-        <option selected>Elige...</option>
+      <select id="pais" formControlName="pais" class="form-control" name="pais">
+        <option selected value="">Elige...</option>
         <option value="México">México</option>
         <option value="USA">USA</option>
         <option value="Canada">Canada</option>
@@ -151,115 +41,102 @@
       </select>
     </div>
     <div class="form-group col-md-6">
-      <label for="diasCredito">Días de Crédito</label>
-      <input
-        name="diasCredito"
-        [(ngModel)]="clienteModel.diasCredito"
-        type="text"
-        class="form-control"
-        id="diasCredito"
-        placeholder="0"
-      />
+      <label for="estado">{{ addCliente.controls['pais'].value === 'Japon' ? 'Prefectura' : 'Estado'}}</label>
+      <select formControlName="estado" *ngIf="addCliente.controls['pais'].value === ''" id="estado" class="form-control" name="estado">
+        <option selected value="">Elige Un Pais...</option>
+      </select>
+      <select formControlName="estado" *ngIf="addCliente.controls['pais'].value === 'México'" id="estado" class="form-control"
+        name="estado">
+        <option selected value="">Elige...</option>
+        <option *ngFor="let state of estadosMexico" [value]="state">{{ state }}</option>
+      </select>
+      <select formControlName="estado" *ngIf="addCliente.controls['pais'].value === 'USA'" id="estado" class="form-control"
+        name="estado">
+        <option selected value="">Elige...</option>
+        <option *ngFor="let state of estadosUsa" [value]="state">{{ state }}</option>
+      </select>
+      <select formControlName="estado" *ngIf="addCliente.controls['pais'].value === 'Canada'" id="estado" class="form-control"
+        name="estado">
+        <option selected value="">Elige...</option>
+        <option *ngFor="let state of estadosCanada" [value]="state">{{ state }}</option>
+      </select>
+      <select formControlName="estado" *ngIf="addCliente.controls['pais'].value === 'Japon'" id="estado" class="form-control"
+        name="estado">
+        <option selected value="">Elige...</option>
+        <option *ngFor="let state of estadosJapon" [value]="state">{{ state }}</option>
+      </select>
     </div>
-    <div class="form-group col-md-6">
+    <div class="form-group col-md-4">
+      <label for="ciudad">Ciudad</label>
+      <input name="ciudad" formControlName="ciudad" type="text" class="form-control" id="ciudad" placeholder="Ciudad" />
+    </div>
+    <div class="form-group col-md-8">
+      <label for="direccion">Dirección</label>
+      <textarea name="direccion" formControlName="direccion" type="text" class="form-control" id="direccion"
+        placeholder="1234 Main St"></textarea>
+    </div>
+    <div class="form-group col-md-2">
+      <label for="CP">CP</label>
+      <input type="text" formControlName="CP" class="form-control" id="CP" name="CP" />
+    </div>
+    <div class="form-group col-md-5">
+      <label for="diasCredito">Días de Crédito</label>
+      <input name="diasCredito" formControlName="diasCredito" type="text" class="form-control" id="diasCredito"
+        placeholder="0" />
+    </div>
+    <div class="form-group col-md-5">
       <label for="limiteCredito">Límite de Crédito</label>
-      <input
-        name="limiteCredito"
-        [(ngModel)]="clienteModel.limiteCredito"
-        type="text"
-        class="form-control"
-        id="limiteCredito"
-        placeholder="0"
-      />
+      <input name="limiteCredito" formControlName="limiteCredito" type="text" class="form-control" id="limiteCredito"
+        placeholder="0" />
     </div>
   </div>
-  <button (click)="toggle()" id="bt" class="btn btn-warning">
-    Agregar Datos Bancarios
+  <button (click)="toggle($event)" type="button" class="btn btn-warning mb">
+    <i class="fa" [ngClass]="{
+      'fa-arrow-up': show === true,
+      'fa-arrow-down': show === false
+    }"></i> Agregar Datos Bancarios
   </button>
+  <span class="ml grey fontSize16">(opcional)</span>
   <br />
 
   <ng-container *ngIf="show">
     <h3>Datos Bancarios</h3>
     <div class="form-row">
-      <div class="form-group col-md-8">
+      <div class="form-group col-md-6">
         <label for="nombre">Nombre Banco</label>
-        <input
-          type="text"
-          class="form-control"
-          id="nombre"
-          placeholder="Nombre"
-        />
+        <input type="text" class="form-control" id="nombre" placeholder="Nombre" />
       </div>
-      <div class="form-group col-md-4">
+      <div class="form-group col-md-6">
         <label for="email">Número de Cuenta</label>
-        <input
-          type="email"
-          class="form-control"
-          id="email"
-          placeholder="Email"
-        />
+        <input type="email" class="form-control" id="email" placeholder="Email" />
       </div>
       <div class="form-group col-md-4">
         <label for="telefono">CLABE</label>
-        <input
-          type="telefono"
-          class="form-control"
-          id="telefono"
-          placeholder="Teléfono"
-        />
+        <input type="telefono" class="form-control" id="telefono" placeholder="Teléfono" />
       </div>
       <div class="form-group col-md-4">
         <label for="telefono">ABA</label>
-        <input
-          type="telefono"
-          class="form-control"
-          id="telefono"
-          placeholder="Teléfono"
-        />
+        <input type="telefono" class="form-control" id="telefono" placeholder="Teléfono" />
       </div>
       <div class="form-group col-md-4">
         <label for="telefono">SWIFT</label>
-        <input
-          type="telefono"
-          class="form-control"
-          id="telefono"
-          placeholder="Teléfono"
-        />
+        <input type="telefono" class="form-control" id="telefono" placeholder="Teléfono" />
       </div>
       <div class="form-group col-md-4">
         <label for="direccion">Dirección</label>
-        <input
-          type="text"
-          class="form-control"
-          id="direccion"
-          placeholder="1234 Main St"
-        />
+        <input type="text" class="form-control" id="direccion" placeholder="1234 Main St" />
       </div>
       <div class="form-group col-md-4">
         <label for="direccion">Ciudad</label>
-        <input
-          type="text"
-          class="form-control"
-          id="direccion"
-          placeholder="1234 Main St"
-        />
+        <input type="text" class="form-control" id="direccion" placeholder="1234 Main St" />
       </div>
       <div class="form-group col-md-4">
         <label for="direccion">Estado</label>
-        <input
-          type="text"
-          class="form-control"
-          id="direccion"
-          placeholder="1234 Main St"
-        />
+        <input type="text" class="form-control" id="direccion" placeholder="1234 Main St" />
       </div>
     </div>
   </ng-container>
-  <button
-    type="submit"
-    class="btn btn-primary"
-    (click)="edit ? updateCliente() : insertCliente()"
-  >
+  <button type="submit" class="btn btn-success">
     Guardar
   </button>
 </form>
