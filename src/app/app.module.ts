@@ -1,6 +1,8 @@
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 import { FormsModule } from "@angular/forms";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 import { AppComponent } from "./app.component";
 import { HeaderComponent } from "./components/shared/header/header.component";
@@ -17,6 +19,11 @@ import { AgregarRutaComponent } from "./components/rutas/agregar-ruta/agregar-ru
 import { InfoClienteComponent } from "./components/clientes/info-cliente/info-cliente.component";
 import { LadaPipe } from './pipes/lada.pipe';
 import { ReactiveFormsModule } from '@angular/forms';
+import { CargasComponent } from './components/cargas/cargas.component';
+import { ProveedoresComponent } from './components/proveedores/proveedores.component';
+import { AgregarProveedoresComponent } from './components/proveedores/agregar-proveedores/agregar-proveedores.component';
+import { OrdenesComponent } from './components/ordenes/ordenes.component';
+import { AgregarOrdenComponent } from './components/ordenes/agregar-orden/agregar-orden.component';
 
 @NgModule({
   declarations: [
@@ -31,14 +38,21 @@ import { ReactiveFormsModule } from '@angular/forms';
     RutasComponent,
     AgregarRutaComponent,
     InfoClienteComponent,
-    LadaPipe
+    LadaPipe,
+    CargasComponent,
+    ProveedoresComponent,
+    AgregarProveedoresComponent,
+    OrdenesComponent,
+    AgregarOrdenComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    BsDatepickerModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent]

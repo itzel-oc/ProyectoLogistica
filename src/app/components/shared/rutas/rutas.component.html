@@ -6,7 +6,7 @@
         <th scope="col">#ID</th>
         <th scope="col">Nombre</th>
         <th scope="col">Ciudad Origen</th>
-        <th scope="col">Estado Origen</th>
+        <th scope="col">Codigo Postal Origen</th>
         <th scope="col">Pais Origen</th>
         <th scope="col">Ciudad Destino</th>
         <th scope="col">Estado Destino</th>
@@ -25,22 +25,43 @@
         <td>{{ ruta.paisDestino }}</td>
 
         <button
-          [routerLink]="['rutas/editar', ruta.idRuta]"
+          [routerLink]="['/rutas/editar', ruta.idRuta]"
           class="btn btn-info"
         >
           <i class="glyphicon glyphicon-edit"></i>
         </button>
         <button
-          onclick="return confirm('¿Deseas Eliminar esta Ruta?');"
+          data-toggle="modal"
           class="btn btn-danger"
-          (click)="deleteRuta(ruta.idRuta)"
+          [attr.data-target]="'#exampleModal'+ruta.idRuta"
         >
           <i class="glyphicon glyphicon-trash"></i>
         </button>
+        <div class="modal fade" [attr.id]="'exampleModal'+ruta.idRuta" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h2 class="modal-title" id="exampleModalLabel">Desea Borrar el siguiente Ruta?</h2>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <div class="flex">
+                  <p>Ruta: </p> <span class="ml"><b>{{ ruta.nombre }}</b></span>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-danger" (click)="deleteRuta(ruta.idRuta)" data-dismiss="modal">Borrar</button>
+              </div>
+            </div>
+          </div>
+        </div>
       </tr>
     </tbody>
   </table>
-  <button class="btn btn-primary" (click)="router.navigate(['/agregarRuta'])">
-    Agregar
+  <button class="btn btn-success" (click)="router.navigate(['/agregarRuta'])">
+    Agregar Ruta
   </button>
 </div>

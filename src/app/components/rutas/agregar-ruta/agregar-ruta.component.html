@@ -1,147 +1,124 @@
-<h2>Agregar Nueva Ruta</h2>
-<form #rutaForm="ngForm" novalidate (ngSubmit)="onSubmit()">
-  {{ rutaForm.value | json }}
+<h2 class="ml"> <button routerLink="/rutas" class="btn btn-primary mr pointer">
+    <i class="fa fa-arrow-left"></i>
+  </button>{{edit ? 'Editar Ruta' : 'Agregar Nueva Ruta'}}</h2>
+<form #rutaForm="ngForm" [formGroup]="addRuta" (ngSubmit)="onSubmit()">
   <hr />
-  {{ rutaForm.value | json }}
   <div class="form-row">
     <div class="form-group col-md-4">
       <label for="nombre">Nombre</label>
-      <input
-        name="nombre"
-        [(ngModel)]="rutaModel.nombre"
-        type="text"
-        class="form-control"
-        id="nombre"
-        placeholder="Nombre"
-      />
+      <input name="nombre" [attr.disabled]="edit ? '' : null" formControlName="nombre" type="text" class="form-control" id="nombre" placeholder="Nombre" />
+      <p *ngIf="submitted && addRuta.controls['nombre'].errors?.required" class="error" role="alert">Nombre no puede
+          estar vacio</p>
     </div>
     <div class="form-group col-md-4">
-      <label for="cdOrigen">Ciudad Origen</label>
-      <input
-        name="cdOrigen"
-        [(ngModel)]="rutaModel.cdOrigen"
-        type="text"
-        class="form-control"
-        id="cdOrigen"
-        placeholder="Ciudad Origen"
-      />
-    </div>
-    <div class="form-group col-md-4">
-      <label for="edoOrigen">Estado Origen</label>
-      <input
-        name="edoOrigen"
-        [(ngModel)]="rutaModel.edoOrigen"
-        type="text"
-        class="form-control"
-        id="edoOrigen"
-        placeholder="Estado Origen"
-      />
-    </div>
-  </div>
-  <div class="form-group col-md-8">
-    <label for="paisOrigen">País Origen</label>
-    <select
-      name="paisOrigen"
-      [(ngModel)]="rutaModel.paisOrigen"
-      id="paisOrigen"
-      class="form-control"
-      name="paisOrigen"
-    >
-      <option value="Mexico">México</option>
-      <option value="USA"> USA</option>
-      <option value="Japon">Japón</option>
-      <option value="Canada"> Canada</option>
-    </select>
-  </div>
-  <div class="form-group col-md-4">
-    <label for="cdDestino">Ciudad Destino</label>
-    <input
-      name="cdDestino"
-      [(ngModel)]="rutaModel.cdDestino"
-      type="text"
-      class="form-control"
-      id="cdDestino"
-      placeholder="Ciudad Destino"
-    />
-  </div>
-  <div class="form-group col-md-4">
-    <label for="edoDestino">Estado Destino</label>
-    <select
-      name="edoDestino"
-      id="edoDestino"
-      class="form-control"
-      name="edoDestino"
-      [(ngModel)]="rutaModel.edoDestino"
-    >
-      <option selected>Elige...</option>
-      <option value="0">Todo México</option>
-      <option value="1">Aguascalientes</option>
-      <option value="2">Baja California</option>
-      <option value="3">Baja California Sur</option>
-      <option value="4">Campeche</option>
-      <option value="5">Coahuila de Zaragoza</option>
-      <option value="6">Colima</option>
-      <option value="7">Chiapas</option>
-      <option value="8">Chihuahua</option>
-      <option value="9">Distrito Federal</option>
-      <option value="10">Durango</option>
-      <option value="11">Guanajuato</option>
-      <option value="12">Guerrero</option>
-      <option value="13">Hidalgo</option>
-      <option value="14">Jalisco</option>
-      <option value="15">México</option>
-      <option value="16">Michoacán de Ocampo</option>
-      <option value="17">Morelos</option>
-      <option value="18">Nayarit</option>
-      <option value="19">Nuevo León</option>
-      <option value="20">Oaxaca</option>
-      <option value="21">Puebla</option>
-      <option value="22">Querétaro</option>
-      <option value="23">Quintana Roo</option>
-      <option value="24">San Luis Potosí</option>
-      <option value="25">Sinaloa</option>
-      <option value="26">Sonora</option>
-      <option value="27">Tabasco</option>
-      <option value="28">Tamaulipas</option>
-      <option value="29">Tlaxcala</option>
-      <option value="30">Veracruz</option>
-      <option value="31">Yucatán</option>
-      <option value="32">Zacatecas</option>
-    </select>
-  </div>
-  <div class="form-row">
-    <div class="form-group col-md-6">
-      <label for="paisDestino">País Destino</label>
-      <select
-        name="paisDestino"
-        id="paisDestino"
-        class="form-control"
-        name="paisDestino"
-        [(ngModel)]="rutaModel.paisDestino"
-      >
+      <label for="paisOrigen">País Origen</label>
+      <select name="paisOrigen" formControlName="paisOrigen" id="paisOrigen" class="form-control" name="paisOrigen">
+        <option selected value="">Seleccionar Pais Origen...</option>
         <option value="Mexico">México</option>
         <option value="USA"> USA</option>
         <option value="Japon">Japón</option>
         <option value="Canada"> Canada</option>
       </select>
+      <p *ngIf="submitted && addRuta.controls['paisOrigen'].errors?.required" class="error" role="alert">Pais Origen no puede estar vacio</p>
     </div>
-    <div class="form-group col-md-2">
-      <label for="CP">CP Destino</label>
-      <input
-        tname="CPDestino"
-        [(ngModel)]="rutaModel.CPDestino"
-        type="text"
-        class="form-control"
-        id="CPDestino"
-        placeholder="CP Destino"
-      />
+    <div class="form-group col-md-4">
+      <label for="cdOrigen">Ciudad Origen</label>
+      <input name="cdOrigen" formControlName="cdOrigen" type="text" class="form-control" id="cdOrigen"
+        placeholder="Ciudad Origen" />
+        <p *ngIf="submitted && addRuta.controls['cdOrigen'].errors?.required" class="error" role="alert">Ciudad Origen no puede
+            estar vacio</p>
+    </div>
+    <div class="form-group col-md-4">
+      <label for="edoOrigen">Estado Origen</label>
+      <select *ngIf="addRuta.controls['paisOrigen'].value === ''" name="edoOrigen" id="edoOrigen"
+        class="form-control" name="edoOrigen" formControlName="edoOrigen">
+        <option selected value="">Elige un pais...</option>
+      </select>
+      <select formControlName="edoOrigen" *ngIf="addRuta.controls['paisOrigen'].value === 'Mexico'" id="edoOrigen"
+        class="form-control" name="edoOrigen">
+        <option selected value="">Elige...</option>
+        <option *ngFor="let state of estadosMexico" [value]="state">{{ state }}</option>
+      </select>
+      <select formControlName="edoOrigen" *ngIf="addRuta.controls['paisOrigen'].value === 'USA'" id="edoOrigen"
+        class="form-control" name="edoOrigen">
+        <option selected value="">Elige...</option>
+        <option *ngFor="let state of estadosUsa" [value]="state">{{ state }}</option>
+      </select>
+      <select formControlName="edoOrigen" *ngIf="addRuta.controls['paisOrigen'].value === 'Canada'" id="edoOrigen"
+        class="form-control" name="edoOrigen">
+        <option selected value="">Elige...</option>
+        <option *ngFor="let state of estadosCanada" [value]="state">{{ state }}</option>
+      </select>
+      <select formControlName="edoOrigen" *ngIf="addRuta.controls['paisOrigen'].value === 'Japon'" id="edoOrigen"
+        class="form-control" name="edoOrigen">
+        <option selected value="">Elige...</option>
+        <option *ngFor="let state of estadosJapon" [value]="state">{{ state }}</option>
+      </select>
+      <p *ngIf="submitted && addRuta.controls['edoOrigen'].errors?.required" class="error"
+        role="alert">Estado de origen no puede estar vacio</p>
     </div>
   </div>
-  <button
-    type="submit"
-    class="btn btn-primary"
-    (click)="edit ? updateRuta() : insertRuta()"
-  >
-    Guardar
-  </button>
+  <div class="form-row">
+    <div class="form-group col-md-4">
+      <label for="paisDestino">País Destino</label>
+      <select name="paisDestino" id="paisDestino" class="form-control" name="paisDestino"
+        formControlName="paisDestino">
+        <option value="" selected>Seleccionar Pais Destino</option>
+        <option value="Mexico">México</option>
+        <option value="USA"> USA</option>
+        <option value="Japon">Japón</option>
+        <option value="Canada"> Canada</option>
+      </select>
+      <p *ngIf="submitted && addRuta.controls['paisDestino'].errors?.required" class="error" role="alert">Pais Destino no puede
+          estar vacio</p>
+    </div>
+    <div class="form-group col-md-4">
+      <label for="edoDestino">Estado Destino</label>
+      <select *ngIf="addRuta.controls['paisDestino'].value === ''" name="edoDestino" id="edoDestino"
+        class="form-control" name="edoDestino" formControlName="edoDestino">
+        <option selected value="">Elige un pais Destino...</option>
+      </select>
+      <select formControlName="edoDestino" *ngIf="addRuta.controls['paisDestino'].value === 'Mexico'" id="edoDestino"
+        class="form-control" name="edoDestino">
+        <option selected value="">Elige...</option>
+        <option *ngFor="let state of estadosMexico" [value]="state">{{ state }}</option>
+      </select>
+      <select formControlName="edoDestino" *ngIf="addRuta.controls['paisDestino'].value === 'USA'" id="edoDestino"
+        class="form-control" name="edoDestino">
+        <option selected value="">Elige...</option>
+        <option *ngFor="let state of estadosUsa" [value]="state">{{ state }}</option>
+      </select>
+      <select formControlName="edoDestino" *ngIf="addRuta.controls['paisDestino'].value === 'Canada'" id="edoDestino"
+        class="form-control" name="edoDestino">
+        <option selected value="">Elige...</option>
+        <option *ngFor="let state of estadosCanada" [value]="state">{{ state }}</option>
+      </select>
+      <select formControlName="edoDestino" *ngIf="addRuta.controls['paisDestino'].value === 'Japon'" id="edoDestino"
+        class="form-control" name="edoDestino">
+        <option selected value="">Elige...</option>
+        <option *ngFor="let state of estadosJapon" [value]="state">{{ state }}</option>
+      </select>
+      <p *ngIf="submitted && addRuta.controls['edoDestino'].errors?.required" class="error"
+        role="alert">Estado de Destino no puede estar vacio</p>
+    </div>
+    <div class="form-group col-md-4">
+      <label for="cdDestino">Ciudad Destino</label>
+      <input name="cdDestino" formControlName="cdDestino" type="text" class="form-control" id="cdDestino"
+        placeholder="Ciudad Destino" />
+        <p *ngIf="submitted && addRuta.controls['cdDestino'].errors?.required" class="error" role="alert">Ciudad Destino no puede
+            estar vacio</p>
+    </div>
+    <div class="form-group col-md-8">
+      <label for="CP">CP Destino</label>
+      <input name="CPDestino" formControlName="CPDestino" type="text" class="form-control width-35" id="CPDestino"
+        placeholder="CP Destino" />
+        <p *ngIf="submitted && addRuta.controls['CPDestino'].errors?.required" class="error" role="alert">Codigo Postal no puede
+            estar vacio</p>
+    </div>
+  </div>
+  <div class="col-md-12">
+    <button type="submit" class="btn btn-success pointer">
+      {{ edit ? 'Editar Ruta' : 'Guardar Ruta'}}
+    </button>
+  </div>
 </form>

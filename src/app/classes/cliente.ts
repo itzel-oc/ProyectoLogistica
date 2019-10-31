@@ -12,6 +12,7 @@ export class Cliente {
     public pais: string,
     public RFC: string,
     public diasCredito: number,
-    public limiteCredito: number
+    public limiteCredito: number,
+    public DatosBancarios?: any
   ) {}
 }

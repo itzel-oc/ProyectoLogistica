@@ -1,0 +1,82 @@
+<h2>Proveedores</h2>
+<div class="table-responsive">
+  <table class="table table-striped table-bordered" style="width:100%" *ngIf="proveedores.length > 0; else noneproveedor">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">#ID</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Dirección</th>
+        <th scope="col">CP</th>
+        <th scope="col">RFC</th>
+        <th scope="col">Teléfono</th>
+        <th scope="col">Días de Crédito</th>
+        <th scope="col">Fecha de Registro</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let proveedor of proveedores">
+        <td>{{ proveedor.idProveedor }}</td>
+        <td>{{ proveedor.nombre }}</td>
+        <td>{{ proveedor.direccion }}</td>
+        <td>{{ proveedor.CP }}</td>
+        <td>{{ proveedor.RFC }}</td>
+        <td>{{ proveedor.telefono | lada: proveedor.pais}}</td>
+        <td>{{ proveedor.diasCredito }}</td>
+        <td>{{ proveedor.createdAt | date: "dd-MM-yyyy" }}</td>
+        <button
+          class="btn btn-primary"
+          (click)="router.navigate(['/infoProveedor', proveedor.idProveedor])"
+        >
+          <i class="glyphicon glyphicon-eye-open"></i>
+        </button>
+        <button
+          [routerLink]="['/proveedores/editar', proveedor.idProveedor]"
+          class="btn btn-info"
+        >
+          <i class="glyphicon glyphicon-edit"></i>
+        </button>
+        <button
+          class="btn btn-danger"
+          data-toggle="modal"
+          [attr.data-target]="'#exampleModal'+proveedor.idProveedor"
+        >
+          <i class="glyphicon glyphicon-trash"></i>
+        </button>
+        <div class="modal fade" [attr.id]="'exampleModal'+proveedor.idProveedor" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h2 class="modal-title" id="exampleModalLabel">Desea Borrar el siguiente Proveedor?</h2>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <div class="flex">
+                  <p>Proveedor: </p> <span class="ml"><b>{{ proveedor.nombre }}</b></span>
+                </div>
+                <div class="flex">
+                  <p>Dias De Credito</p> <span class="ml"><b>{{ proveedor.diasCredito }}</b></span>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-danger" (click)="deleteCliente(proveedor.idProveedor)" data-dismiss="modal">Borrar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </tr>
+    </tbody>
+  </table>
+  <button
+    class="btn btn-success"
+    (click)="router.navigate(['/agregarProveedor'])"
+  >
+    Agregar Proveedor
+  </button>
+  <ng-template #noneproveedor>
+    <h1 class="text-center">No existen Proveedores</h1>
+  </ng-template>
+</div>
+

@@ -26,3 +26,17 @@
 .fontSize16 {
     font-size: 16px;
 }
+
+.error {
+    color: darkred;
+    height: 0;
+    margin: 0;
+    margin-bottom: 1rem;
+    text-decoration: underline;
+}
+.error::before {
+    content: '*';
+}
+.pointer {
+    cursor: pointer;
+}

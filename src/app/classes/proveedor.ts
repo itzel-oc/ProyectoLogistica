@@ -13,6 +13,7 @@ export class Proveedor {
     public estado: string,
     public pais: string,
     public diasCredito: number,
-    public limiteCredito: number
+    public limiteCredito: number,
+    public DatosBancarios?: any
   ) {}
 }

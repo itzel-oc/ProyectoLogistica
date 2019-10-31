@@ -1,40 +1,42 @@
-<h2 class="ml"> <button routerLink="/clientes" class="btn btn-primary mr">
+<h2 class="ml"> <button routerLink="/proveedores" class="btn btn-primary mr">
     <i class="fa fa-arrow-left"></i>
-  </button> {{edit ? 'Editar Cliente' : 'Alta Cliente'}}</h2>
-<form #clienteForm="ngForm" [formGroup]="addCliente" novalidate (ngSubmit)="onSubmit()">
+  </button> {{edit ? 'Editar Proveedor' : 'Alta de Proveedor'}}</h2>
+<form #clienteForm="ngForm" [formGroup]="addProveedor" (ngSubmit)="onSubmit()">
   <hr />
   <div class="form-row">
     <div class="form-group col-md-8">
       <label for="nombre">Nombre</label>
       <input name="nombre" formControlName="nombre" type="text" class="form-control" id="nombre" placeholder="Nombre" />
-      <p *ngIf="submitted && addCliente.controls['nombre'].errors?.required" class="error" role="alert">Nombre no puede
+      <p *ngIf="submitted && addProveedor.controls['nombre'].errors?.required" class="error" role="alert">Nombre no
+        puede
         estar vacio</p>
     </div>
     <div class="form-group col-md-4">
       <label for="RFC">RFC</label>
       <input name="RFC" formControlName="RFC" type="text" class="form-control" id="RFC" placeholder="RFC" />
-      <p *ngIf="submitted && addCliente.controls['RFC'].errors?.required" class="error" role="alert">RFC no puede
+      <p *ngIf="submitted && addProveedor.controls['RFC'].errors?.required" class="error" role="alert">RFC no puede
         estar vacio</p>
     </div>
     <div class="form-group col-md-4">
       <label for="contacto">Contacto Principal</label>
       <input name="contacto" formControlName="contacto" type="text" class="form-control" id="contacto"
         placeholder="Contacto" />
-      <p *ngIf="submitted && addCliente.controls['contacto'].errors?.required" class="error" role="alert">Contacto principal no puede
+      <p *ngIf="submitted && addProveedor.controls['contacto'].errors?.required" class="error" role="alert">Contacto
+        principal no puede
         estar vacio</p>
     </div>
     <div class="form-group col-md-4">
       <label for="email">Email</label>
       <input name="email" formControlName="email" type="email" class="form-control" id="email" placeholder="Email" />
-      <p *ngIf="submitted && addCliente.controls['email'].errors?.required" class="error"
-        role="alert">Email no puede estar vacio</p>
+      <p *ngIf="submitted && addProveedor.controls['email'].errors?.required" class="error" role="alert">Email no puede
+        estar vacio</p>
     </div>
     <div class="form-group col-md-4">
       <label for="telefono">Teléfono</label>
       <input name="telefono" formControlName="telefono" type="telefono" class="form-control" id="telefono"
         placeholder="Teléfono" />
-        <p *ngIf="submitted && addCliente.controls['telefono'].errors?.required" class="error"
-        role="alert">Telefono no puede estar vacio</p>
+      <p *ngIf="submitted && addProveedor.controls['telefono'].errors?.required" class="error" role="alert">Telefono no
+        puede estar vacio</p>
     </div>
   </div>
   <div class="form-row">
@@ -47,83 +49,97 @@
         <option value="Canada">Canada</option>
         <option value="Japon">Japón</option>
       </select>
-      <p *ngIf="submitted && addCliente.controls['pais'].errors?.required" class="error"
-        role="alert">Pais no puede estar vacio</p>
+      <p *ngIf="submitted && addProveedor.controls['pais'].errors?.required" class="error" role="alert">Pais no puede
+        estar vacio</p>
     </div>
     <div class="form-group col-md-6">
-      <label for="estado">{{ addCliente.controls['pais'].value === 'Japon' ? 'Prefectura' : 'Estado'}}</label>
-      <select formControlName="estado" *ngIf="addCliente.controls['pais'].value === ''" id="estado" class="form-control"
-        name="estado">
+      <label for="estado">{{ addProveedor.controls['pais'].value === 'Japon' ? 'Prefectura' : 'Estado'}}</label>
+      <select formControlName="estado" *ngIf="addProveedor.controls['pais'].value === ''" id="estado"
+        class="form-control" name="estado">
         <option selected value="">Elige Un Pais...</option>
       </select>
-      <select formControlName="estado" *ngIf="addCliente.controls['pais'].value === 'México'" id="estado"
+      <select formControlName="estado" *ngIf="addProveedor.controls['pais'].value === 'México'" id="estado"
         class="form-control" name="estado">
         <option selected value="">Elige...</option>
         <option *ngFor="let state of estadosMexico" [value]="state">{{ state }}</option>
       </select>
-      <select formControlName="estado" *ngIf="addCliente.controls['pais'].value === 'USA'" id="estado"
+      <select formControlName="estado" *ngIf="addProveedor.controls['pais'].value === 'USA'" id="estado"
         class="form-control" name="estado">
         <option selected value="">Elige...</option>
         <option *ngFor="let state of estadosUsa" [value]="state">{{ state }}</option>
       </select>
-      <select formControlName="estado" *ngIf="addCliente.controls['pais'].value === 'Canada'" id="estado"
+      <select formControlName="estado" *ngIf="addProveedor.controls['pais'].value === 'Canada'" id="estado"
         class="form-control" name="estado">
         <option selected value="">Elige...</option>
         <option *ngFor="let state of estadosCanada" [value]="state">{{ state }}</option>
       </select>
-      <select formControlName="estado" *ngIf="addCliente.controls['pais'].value === 'Japon'" id="estado"
+      <select formControlName="estado" *ngIf="addProveedor.controls['pais'].value === 'Japon'" id="estado"
         class="form-control" name="estado">
         <option selected value="">Elige...</option>
         <option *ngFor="let state of estadosJapon" [value]="state">{{ state }}</option>
       </select>
-      <p *ngIf="submitted && addCliente.controls['estado'].errors?.required" class="error"
-        role="alert">estado no puede estar vacio</p>
+      <p *ngIf="submitted && addProveedor.controls['estado'].errors?.required" class="error" role="alert">estado no
+        puede estar vacio</p>
     </div>
     <div class="form-group col-md-4">
       <label for="ciudad">Ciudad</label>
       <input name="ciudad" formControlName="ciudad" type="text" class="form-control" id="ciudad" placeholder="Ciudad" />
-      <p *ngIf="submitted && addCliente.controls['ciudad'].errors?.required" class="error"
-        role="alert">Ciudad no puede estar vacio</p>
+      <p *ngIf="submitted && addProveedor.controls['ciudad'].errors?.required" class="error" role="alert">Ciudad no
+        puede estar vacio</p>
     </div>
     <div class="form-group col-md-8">
       <label for="direccion">Dirección</label>
       <textarea name="direccion" formControlName="direccion" type="text" class="form-control" id="direccion"
         placeholder="1234 Main St"></textarea>
-        <p *ngIf="submitted && addCliente.controls['direccion'].errors?.required" class="error"
-        role="alert">Direccion no puede estar vacio</p>
+      <p *ngIf="submitted && addProveedor.controls['direccion'].errors?.required" class="error" role="alert">Direccion
+        no puede estar vacio</p>
     </div>
     <div class="form-group col-md-4">
       <label for="CP">CP</label>
       <input type="text" formControlName="CP" class="form-control" id="CP" name="CP" />
-      <p *ngIf="submitted && addCliente.controls['CP'].errors?.required" class="error"
-        role="alert">CP no puede estar vacio</p>
+      <p *ngIf="submitted && addProveedor.controls['CP'].errors?.required" class="error" role="alert">CP no puede estar
+        vacio</p>
     </div>
     <div class="form-group col-md-4">
       <label for="diasCredito">Días de Crédito</label>
       <input name="diasCredito" formControlName="diasCredito" type="text" class="form-control" id="diasCredito"
         placeholder="0" />
-        <p *ngIf="submitted && addCliente.controls['diasCredito'].errors?.required" class="error"
-        role="alert">Dias de Credito no puede estar vacio</p>
+      <p *ngIf="submitted && addProveedor.controls['diasCredito'].errors?.required" class="error" role="alert">Dias de
+        Credito no puede estar vacio</p>
     </div>
     <div class="form-group col-md-4">
       <label for="limiteCredito">Límite de Crédito</label>
       <input name="limiteCredito" formControlName="limiteCredito" type="text" class="form-control" id="limiteCredito"
         placeholder="0" />
-        <p *ngIf="submitted && addCliente.controls['limiteCredito'].errors?.required" class="error"
-        role="alert">LimiteCredito no puede estar vacio</p>
+      <p *ngIf="submitted && addProveedor.controls['limiteCredito'].errors?.required" class="error" role="alert">
+        LimiteCredito no puede estar vacio</p>
+    </div>
+    <div class="col-md-4">
+      <label for="ruta">Ruta</label>
+      <select formControlName="idRuta" id="estado"
+        class="form-control" name="estado">
+        <option selected value="">Elige una ruta...</option>
+        <option *ngFor="let ruta of rutas" [value]="ruta.idRuta">{{ ruta.nombre }}</option>
+      </select>
+      <p *ngIf="submitted && addProveedor.controls['idRuta'].errors?.required" class="error" role="alert">Rutas no
+          puede estar vacio</p>
     </div>
   </div>
-  <button (click)="toggle($event)" type="button" class="btn btn-warning mb">
-    <i class="fa" [ngClass]="{
-      'fa-arrow-up': show === true,
-      'fa-arrow-down': show === false
-    }"></i> Agregar Datos Bancarios
-  </button>
-  <span class="ml grey fontSize16">(opcional)</span>
-  <br />
+  
+  <div class="col-md-12">
+    <button (click)="toggle($event)" type="button" class="btn btn-warning mb mt">
+      <i class="fa" [ngClass]="{
+        'fa-arrow-up': show === true,
+        'fa-arrow-down': show === false
+      }"></i> Agregar Datos Bancarios
+    </button>
+    <span class="ml grey fontSize16">(opcional)</span>
+  </div>
 
   <ng-container *ngIf="show" formGroupName="DatosBancarios">
-    <h3>Datos Bancarios</h3>
+    <div class="col-md-12">
+      <h3>Datos Bancarios</h3>
+    </div>
     <div class="form-row">
       <div class="form-group col-md-6">
         <label for="nombre">Nombre Banco</label>

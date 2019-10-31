@@ -14,7 +14,7 @@ export class RutasComponent implements OnInit {
 
   constructor(
     private _rutasService: RutasService,
-    private router: Router,
+    public router: Router,
     private route: ActivatedRoute
   ) {}
 
@@ -31,13 +31,6 @@ export class RutasComponent implements OnInit {
     });
   }
 
-  getRutaDetails(idRuta) {
-    this._rutasService.getRuta(idRuta).subscribe(data => {
-      this.ruta = data;
-      console.log(this.ruta);
-    });
-  }
-
   fetchData() {
     this._rutasService.getAllRutas().subscribe(data => {
       this.rutas = data;
@@ -45,7 +38,6 @@ export class RutasComponent implements OnInit {
   }
 
   deleteRuta(idRuta) {
-    console.log(idRuta);
     this._rutasService.deleteRuta(idRuta).subscribe(() => {
       this.fetchData();
     });
@@ -53,11 +45,5 @@ export class RutasComponent implements OnInit {
 
   ngOnInit() {
     this._rutasService.getAllRutas().subscribe(data => (this.rutas = data));
-
-    this.route.params.subscribe(params => {
-      this._rutasService.getRuta(params["idRuta"]).subscribe(res => {
-        this.ruta = res;
-      });
-    });
   }
 }

@@ -1,0 +1,80 @@
+<h2 class="ml"> <button routerLink="/ordenes" class="btn btn-primary mr">
+        <i class="fa fa-arrow-left"></i>
+    </button> {{edit ? 'Editar Orden' : 'Alta de Orden'}}</h2>
+<form #clienteForm="ngForm" [formGroup]="addOrden" (ngSubmit)="onSubmit()">
+    <hr />
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="producto">Producto</label>
+            <input name="producto" formControlName="producto" type="text" class="form-control" id="producto"
+                placeholder="Producto" />
+            <p *ngIf="submitted && addOrden.controls['producto'].errors?.required" class="error" role="alert">Producto
+                no
+                puede estar vacio</p>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="cliente">Cliente</label>
+            <select formControlName="idCliente" id="cliente" class="form-control" name="cliente">
+                <option selected value="">Elige un cliente...</option>
+                <option *ngFor="let cliente of clientes" [value]="cliente.idCliente">{{ cliente?.nombre }}</option>
+            </select>
+            <p *ngIf="submitted && addOrden.controls['idCliente'].errors?.required" class="error" role="alert">Cliente
+                no puede
+                estar vacio</p>
+        </div>
+        <div class="form-group col-md-4">
+            <label for="cliente">Ruta</label>
+            <select formControlName="idRuta" id="ruta" class="form-control" name="ruta">
+                <option selected value="">Elige una ruta...</option>
+                <option *ngFor="let ruta of rutas" [value]="ruta.idRuta">{{ ruta?.nombre }}</option>
+            </select>
+            <p *ngIf="submitted && addOrden.controls['idRuta'].errors?.required" class="error" role="alert">Rutas no
+                puede
+                estar vacio</p>
+        </div>
+        <div class="form-group col-md-4">
+            <label for="tipodecarga">Tipo De Carga</label>
+            <input name="tipodecarga" formControlName="tipoCarga" type="text" class="form-control" id="tipocarga"
+                placeholder="Tipo de carga" />
+            <p *ngIf="submitted && addOrden.controls['tipoCarga'].errors?.required" class="error" role="alert">Tipo de
+                carga no puede
+                estar vacio</p>
+        </div>
+        <div class="form-group col-md-4">
+            <label for="telefono">Fecha de Carga</label>
+            <input type="text"
+              placeholder="Fecha de carga"
+              formControlName="fechaCarga"
+              class="form-control"
+              bsDatepicker
+              [bsConfig]="{ adaptivePosition: true }">
+            <p *ngIf="submitted && addOrden.controls['fechaCarga'].errors?.required" class="error" role="alert">
+                Fecha de carga no puede estar vacio</p>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="origen">Direccion de Origen</label>
+            <input name="ciudad" formControlName="direccionOrigen" type="text" class="form-control" id="origen"
+                placeholder="Direccion de Origen" />
+            <p *ngIf="submitted && addOrden.controls['direccionOrigen'].errors?.required" class="error" role="alert">
+                Direccion de Origen no
+                puede estar vacio</p>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="destino">Dirección de Destino</label>
+            <input name="destino" formControlName="direccionDestino" type="text" class="form-control" id="destino"
+                placeholder="Direccion de Destino"/>
+            <p *ngIf="submitted && addOrden.controls['direccionDestino'].errors?.required" class="error"
+                role="alert">Direccion de Destino
+                no puede estar vacio</p>
+        </div>
+    </div>
+
+
+    <div class="col-md-12">
+        <button type="submit" class="btn btn-success">
+            Guardar
+        </button>
+    </div>
+</form>

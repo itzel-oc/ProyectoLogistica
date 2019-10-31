@@ -11,7 +11,7 @@ export class ClientesService {
   constructor(private http: HttpClient) {}
 
   getAllClientes(): Observable<ICliente[]> {
-    return this.http.get<ICliente[]>("http://localhost:3000/clientes");
+    return this.http.get<ICliente[]>("http://admin-blaslogistica.com:3000/clientes");
   }
 
   insertCliente(cliente: Cliente) {

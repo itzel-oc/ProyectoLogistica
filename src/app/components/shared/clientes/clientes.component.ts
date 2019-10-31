@@ -14,7 +14,7 @@ export class ClientesComponent implements OnInit {
 
   constructor(
     private _clientesService: ClientesService,
-    private router: Router,
+    public router: Router,
     private route: ActivatedRoute
   ) { }
 
@@ -22,20 +22,6 @@ export class ClientesComponent implements OnInit {
     this.router.navigate([`${pageName}`]);
   }
 
-  onClick() {
-    this.route.params.subscribe(params => {
-      this._clientesService.getCliente(params["idCliente"]).subscribe(res => {
-        this.cliente = res;
-      });
-    });
-  }
-
-  getClienteDetails(idCliente) {
-    this._clientesService.getCliente(idCliente).subscribe(data => {
-      this.cliente = data;
-      console.log(this.cliente);
-    });
-  }
 
   deleteCliente(idCliente) {
     this._clientesService.deleteCliente(idCliente).subscribe(() => {
@@ -47,12 +33,6 @@ export class ClientesComponent implements OnInit {
     this._clientesService
       .getAllClientes()
       .subscribe(data => this.clientes = data);
-
-    this.route.params.subscribe(params => {
-      this._clientesService.getCliente(params["idCliente"]).subscribe(res => {
-        this.cliente = res;
-      });
-    });
   }
 
   fetchData() {
