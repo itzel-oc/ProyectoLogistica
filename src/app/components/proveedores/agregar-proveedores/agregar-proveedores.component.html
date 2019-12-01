@@ -3,21 +3,22 @@
   </button> {{edit ? 'Editar Proveedor' : 'Alta de Proveedor'}}</h2>
 <form #clienteForm="ngForm" [formGroup]="addProveedor" (ngSubmit)="onSubmit()">
   <hr />
-  <div class="form-row">
-    <div class="form-group col-md-8">
+  <div class="row row-padding">
+    <div class="col-md-8">
       <label for="nombre">Nombre</label>
       <input name="nombre" formControlName="nombre" type="text" class="form-control" id="nombre" placeholder="Nombre" />
       <p *ngIf="submitted && addProveedor.controls['nombre'].errors?.required" class="error" role="alert">Nombre no
         puede
         estar vacio</p>
     </div>
-    <div class="form-group col-md-4">
+    <div class="col-md-4">
       <label for="RFC">RFC</label>
       <input name="RFC" formControlName="RFC" type="text" class="form-control" id="RFC" placeholder="RFC" />
       <p *ngIf="submitted && addProveedor.controls['RFC'].errors?.required" class="error" role="alert">RFC no puede
         estar vacio</p>
     </div>
-    <div class="form-group col-md-4">
+  </div>
+    <div class="col-md-4">
       <label for="contacto">Contacto Principal</label>
       <input name="contacto" formControlName="contacto" type="text" class="form-control" id="contacto"
         placeholder="Contacto" />
@@ -25,20 +26,18 @@
         principal no puede
         estar vacio</p>
     </div>
-    <div class="form-group col-md-4">
+    <div class="col-md-4">
       <label for="email">Email</label>
       <input name="email" formControlName="email" type="email" class="form-control" id="email" placeholder="Email" />
-      <p *ngIf="submitted && addProveedor.controls['email'].errors?.required" class="error" role="alert">Email no puede
-        estar vacio</p>
+      <p *ngIf="submitted && addProveedor.controls['email'].errors?.email" class="error" role="alert">Email formato no valido</p>
     </div>
     <div class="form-group col-md-4">
       <label for="telefono">Teléfono</label>
-      <input name="telefono" formControlName="telefono" type="telefono" class="form-control" id="telefono"
+      <input name="telefono" formControlName="telefono" type="number" class="form-control" id="telefono"
         placeholder="Teléfono" />
       <p *ngIf="submitted && addProveedor.controls['telefono'].errors?.required" class="error" role="alert">Telefono no
         puede estar vacio</p>
     </div>
-  </div>
   <div class="form-row">
     <div class="form-group col-md-6">
       <label for="estado">País</label>
@@ -114,19 +113,25 @@
       <p *ngIf="submitted && addProveedor.controls['limiteCredito'].errors?.required" class="error" role="alert">
         LimiteCredito no puede estar vacio</p>
     </div>
-    <div class="col-md-4">
-      <label for="ruta">Ruta</label>
-      <select formControlName="idRuta" id="estado"
-        class="form-control" name="estado">
-        <option selected value="">Elige una ruta...</option>
-        <option *ngFor="let ruta of rutas" [value]="ruta.idRuta">{{ ruta.nombre }}</option>
-      </select>
-      <p *ngIf="submitted && addProveedor.controls['idRuta'].errors?.required" class="error" role="alert">Rutas no
-          puede estar vacio</p>
+    <div class="col-md-4" >
+      <div class="col-md-12 p0" *ngFor="let selects of inner; let index=index">
+        <label for="ruta">Ruta</label>
+        <div class="view-flex">
+          <button (click)="substractRuta(index)" type="button" class="btn btn-danger border0" *ngIf="inner.length > 1"> <i class="fa fa-minus"></i> </button>
+          <select [formControlName]="'idRuta'+index" id="estado"
+            class="form-control" name="estado">
+            <option selected value="">Elige una ruta...</option>
+            <option *ngFor="let ruta of rutas" [value]="ruta.idRuta">{{ ruta.nombre }}</option>
+          </select>
+          <button (click)="addRuta()" type="button" class="btn btn-primary border0"> <i class="fa fa-plus"></i> </button>
+        </div>
+        <p *ngIf="submitted && addProveedor.controls['idRuta'+index].errors?.required" class="error" role="alert">Rutas no
+            puede estar vacio</p>
+      </div>
     </div>
   </div>
   
-  <div class="col-md-12">
+  <div class="col-md-12 mt">
     <button (click)="toggle($event)" type="button" class="btn btn-warning mb mt">
       <i class="fa" [ngClass]="{
         'fa-arrow-up': show === true,

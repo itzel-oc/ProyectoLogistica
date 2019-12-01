@@ -20,7 +20,8 @@
         <td>{{ proveedor.direccion }}</td>
         <td>{{ proveedor.CP }}</td>
         <td>{{ proveedor.RFC }}</td>
-        <td>{{ proveedor.telefono | lada: proveedor.pais}}</td>
+        <td *ngIf="proveedor.telefono">{{ proveedor.telefono | lada: proveedor.pais}}</td>
+        <td *ngIf="!proveedor.telefono"></td>
         <td>{{ proveedor.diasCredito }}</td>
         <td>{{ proveedor.createdAt | date: "dd-MM-yyyy" }}</td>
         <button

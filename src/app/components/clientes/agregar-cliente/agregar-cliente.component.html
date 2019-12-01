@@ -3,7 +3,7 @@
   </button> {{edit ? 'Editar Cliente' : 'Alta Cliente'}}</h2>
 <form #clienteForm="ngForm" [formGroup]="addCliente" novalidate (ngSubmit)="onSubmit()">
   <hr />
-  <div class="form-row">
+  <div class="row row-padding">
     <div class="form-group col-md-8">
       <label for="nombre">Nombre</label>
       <input name="nombre" formControlName="nombre" type="text" class="form-control" id="nombre" placeholder="Nombre" />
@@ -16,6 +16,7 @@
       <p *ngIf="submitted && addCliente.controls['RFC'].errors?.required" class="error" role="alert">RFC no puede
         estar vacio</p>
     </div>
+  </div>
     <div class="form-group col-md-4">
       <label for="contacto">Contacto Principal</label>
       <input name="contacto" formControlName="contacto" type="text" class="form-control" id="contacto"
@@ -26,17 +27,16 @@
     <div class="form-group col-md-4">
       <label for="email">Email</label>
       <input name="email" formControlName="email" type="email" class="form-control" id="email" placeholder="Email" />
-      <p *ngIf="submitted && addCliente.controls['email'].errors?.required" class="error"
-        role="alert">Email no puede estar vacio</p>
+      <p *ngIf="submitted && addCliente.controls['email'].errors?.email" class="error"
+        role="alert">Email no es valido</p>
     </div>
     <div class="form-group col-md-4">
       <label for="telefono">Teléfono</label>
-      <input name="telefono" formControlName="telefono" type="telefono" class="form-control" id="telefono"
+      <input name="telefono" formControlName="telefono" type="number" class="form-control" id="telefono"
         placeholder="Teléfono" />
-        <p *ngIf="submitted && addCliente.controls['telefono'].errors?.required" class="error"
-        role="alert">Telefono no puede estar vacio</p>
+        <p *ngIf="submitted && addCliente.controls['telefono'].errors?.pattern" class="error"
+        role="alert">Telefono no tiene formato correcto</p>
     </div>
-  </div>
   <div class="form-row">
     <div class="form-group col-md-6">
       <label for="estado">País</label>

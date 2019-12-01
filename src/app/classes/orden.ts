@@ -4,6 +4,7 @@ export class Orden {
     public idCliente: number,
     public idRuta: number,
     public producto: string,
+    public PONumber: string,
     public tipoCarga: string,
     public fechaCarga: Date,
     public direccionOrigen: string,

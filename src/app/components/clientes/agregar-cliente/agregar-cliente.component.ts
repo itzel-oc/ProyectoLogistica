@@ -47,7 +47,6 @@ export class AgregarClienteComponent implements OnInit {
       .updateCliente(this.clienteModel.idCliente, this.clienteModel)
       .subscribe(
         res => {
-          console.log(res);
           this.router.navigate(["/clientes"]);
         },
         error => {
@@ -78,18 +77,18 @@ export class AgregarClienteComponent implements OnInit {
     this.estadosJapon = this.states.getJapon();
     const params = this.route.snapshot.params;
     this.addCliente = this.formBuilder.group({
-      nombre: [null, [Validators.required]],
-      RFC: [null, Validators.required],
-      contacto: [null, Validators.required],
-      email: [null, [Validators.required, Validators.email]],
-      telefono: [null, [Validators.required, Validators.pattern("^[0-9]*$")]],
-      pais: ['', Validators.required],
-      estado: ['', Validators.required],
-      ciudad: [null, Validators.required],
-      direccion: [null, Validators.required],
-      CP: [null, Validators.required],
-      diasCredito: [null, Validators.required],
-      limiteCredito: [null, Validators.required],
+      nombre: [null, Validators.required],
+      RFC: [null],
+      contacto: [null],
+      email: [null, [Validators.email]],
+      telefono: [null, [Validators.pattern("^[0-9]*$")]],
+      pais: [''],
+      estado: [''],
+      ciudad: [null],
+      direccion: [null],
+      CP: [null],
+      diasCredito: [null],
+      limiteCredito: [null],
       DatosBancarios: this.formBuilder.group({
         banco: [null],
         cuenta: [''],
@@ -108,18 +107,18 @@ export class AgregarClienteComponent implements OnInit {
           this.clienteModel = {...res};
           this.edit = true;
           this.addCliente = this.formBuilder.group({
-            nombre: [this.clienteModel.nombre, [Validators.required]],
-            RFC: [this.clienteModel.RFC, Validators.required],
-            contacto: [this.clienteModel.contacto, Validators.required],
-            email: [this.clienteModel.email, [Validators.required, Validators.email]],
-            telefono: [this.clienteModel.telefono, [Validators.required, Validators.pattern("^[0-9]*$")]],
-            pais: [this.clienteModel.pais, Validators.required],
-            estado: [this.clienteModel.estado, Validators.required],
-            ciudad: [this.clienteModel.ciudad, Validators.required],
-            direccion: [this.clienteModel.direccion, Validators.required],
-            CP: [this.clienteModel.CP, Validators.required],
-            diasCredito: [this.clienteModel.diasCredito, Validators.required],
-            limiteCredito: [this.clienteModel.limiteCredito, Validators.required],
+            nombre: [this.clienteModel.nombre, Validators.required],
+            RFC: [this.clienteModel.RFC],
+            contacto: [this.clienteModel.contacto],
+            email: [this.clienteModel.email, [Validators.email]],
+            telefono: [this.clienteModel.telefono, [Validators.pattern("^[0-9]*$")]],
+            pais: [this.clienteModel.pais],
+            estado: [this.clienteModel.estado],
+            ciudad: [this.clienteModel.ciudad],
+            direccion: [this.clienteModel.direccion],
+            CP: [this.clienteModel.CP],
+            diasCredito: [this.clienteModel.diasCredito],
+            limiteCredito: [this.clienteModel.limiteCredito],
             DatosBancarios: this.formBuilder.group({
               banco: [this.clienteModel.DatosBancarios.length > 0 ? this.clienteModel.DatosBancarios[0].banco : null],
               cuenta: [this.clienteModel.DatosBancarios.length > 0 ? this.clienteModel.DatosBancarios[0].cuenta : null],

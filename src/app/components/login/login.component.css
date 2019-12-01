@@ -1,0 +1,23 @@
+.login-container {
+    display: flex;
+    flex-direction: column;
+    width: 26%;
+}
+.flex-inputs {
+    display: flex;
+    flex-direction: column;
+}
+.fullheight {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+}
+.login-title {
+    color: white;
+}
+.login-text {
+    color: white;
+}
+

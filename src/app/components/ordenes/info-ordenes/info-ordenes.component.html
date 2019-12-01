@@ -1,0 +1,35 @@
+<hr />
+<h3><button [routerLink]="['/ordenes']" class="btn btn-primary"><i class="fa fa-arrow-left"></i></button> Datos de la Orden</h3>
+<hr />
+<div class="view-flex">
+  <p class="titulo">Producto:</p>
+  <p class="ml">{{ orden.producto }}</p>
+</div>
+<div class="view-flex">
+  <p class="titulo">Cliente</p>
+  <p class="ml">{{ cliente.nombre }}</p>
+</div>
+<div class="view-flex">
+  <p class="titulo">Ruta</p>
+  <p class="ml">{{ ruta.nombre }}</p>
+</div>
+<div class="view-flex">
+  <p class="titulo">Numero de Orden de Producto</p>
+  <p class="ml">{{ orden.PONumber }}</p>
+</div>
+<div class="view-flex">
+  <p class="titulo">Tipo Carga:</p>
+  <p class="ml">{{ orden.tipoCarga }}</p>
+</div>
+<div class="view-flex">
+  <p class="titulo">Fecha Carga</p>
+  <p class="ml">{{ orden.fechaCarga }}</p>
+</div>
+<div class="view-flex">
+  <p class="titulo">Direccion Origen:</p>
+  <p class="ml">{{ orden.direccionOrigen }}</p>
+</div>
+<div class="view-flex">
+  <p class="titulo">Direccion Destino:</p>
+  <p class="ml">{{ orden.direccionDestino }}</p>
+</div>

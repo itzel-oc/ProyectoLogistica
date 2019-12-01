@@ -19,7 +19,7 @@ export class AgregarRutaComponent implements OnInit {
     private formBuilder: FormBuilder
   ) {}
   public show: boolean = false;
-  public buttonName: any = "Show";
+  public buttonName: any = 'Show';
   public estadosMexico: string[];
   public estadosUsa: string[];
   public estadosCanada: string[];
@@ -27,14 +27,17 @@ export class AgregarRutaComponent implements OnInit {
   addRuta: FormGroup;
   submitted: boolean = false;
 
-  rutaModel = new Ruta(0, "", "", "", "", "", "", "", "", "");
+  rutaModel = new Ruta(0, '', '', '', '', '', '', '', '', '');
 
   edit: boolean = false;
 
   toggle() {
     this.show = !this.show;
-    if (this.show) this.buttonName = "Hide";
-    else this.buttonName = "Show";
+    if (this.show) {
+      this.buttonName = 'Hide';
+    } else {
+      this.buttonName = 'Show';
+    }
   }
 
   onSubmit() {
@@ -44,7 +47,7 @@ export class AgregarRutaComponent implements OnInit {
       if (!this.edit) {
         this._rutasService
           .insertRuta(this.rutaModel)
-          .subscribe(data => this.router.navigate(["/rutas"]));
+          .subscribe(data => this.router.navigate(['/ruta']));
       } else {
         this.updateRuta();
       }
@@ -56,8 +59,7 @@ export class AgregarRutaComponent implements OnInit {
       .updateRuta(this.rutaModel.idRuta, this.rutaModel)
       .subscribe(
         res => {
-          console.log(res);
-          this.router.navigate(["/rutas"]);
+          this.router.navigate(['/rutas']);
         },
         error => {
           console.log(error);
@@ -72,30 +74,29 @@ export class AgregarRutaComponent implements OnInit {
     this.estadosJapon = this.states.getJapon();
     const params = this.route.snapshot.params;
     this.addRuta = this.formBuilder.group({
-      nombre: [null, [Validators.required]],
-      paisOrigen: ['', Validators.required],
-      cdOrigen: [null, Validators.required],
-      edoOrigen: ['', [Validators.required]],
-      paisDestino: ['', [Validators.required]],
-      edoDestino: ['', Validators.required],
-      cdDestino: ['', Validators.required],
-      CPDestino: ['', Validators.required]
+      nombre: [null, Validators.required],
+      paisOrigen: [''],
+      cdOrigen: [null],
+      edoOrigen: [''],
+      paisDestino: [''],
+      edoDestino: [''],
+      cdDestino: [''],
+      CPDestino: ['']
     });
     if (params.idRuta) {
       this._rutasService.getRuta(params.idRuta).subscribe(
         res => {
           this.rutaModel = {...res};
-          console.log(this.rutaModel)
           this.edit = true;
           this.addRuta = this.formBuilder.group({
-            nombre: [this.rutaModel.nombre, [Validators.required]],
-            paisOrigen: [this.rutaModel.paisOrigen, Validators.required],
-            cdOrigen: [this.rutaModel.cdOrigen, Validators.required],
-            edoOrigen: [this.rutaModel.edoOrigen, [Validators.required]],
-            paisDestino: [this.rutaModel.paisDestino, [Validators.required]],
-            edoDestino: [this.rutaModel.edoDestino, Validators.required],
-            cdDestino: [this.rutaModel.cdDestino, Validators.required],
-            CPDestino: [this.rutaModel.CPDestino, Validators.required]
+            nombre: [this.rutaModel.nombre, Validators.required],
+            paisOrigen: [this.rutaModel.paisOrigen],
+            cdOrigen: [this.rutaModel.cdOrigen],
+            edoOrigen: [this.rutaModel.edoOrigen],
+            paisDestino: [this.rutaModel.paisDestino],
+            edoDestino: [this.rutaModel.edoDestino],
+            cdDestino: [this.rutaModel.cdDestino],
+            CPDestino: [this.rutaModel.CPDestino]
           });
         },
         error => console.log(error)

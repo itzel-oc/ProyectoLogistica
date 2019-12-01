@@ -24,6 +24,14 @@ import { ProveedoresComponent } from './components/proveedores/proveedores.compo
 import { AgregarProveedoresComponent } from './components/proveedores/agregar-proveedores/agregar-proveedores.component';
 import { OrdenesComponent } from './components/ordenes/ordenes.component';
 import { AgregarOrdenComponent } from './components/ordenes/agregar-orden/agregar-orden.component';
+import { InfoProveedorComponent } from './components/proveedores/info-proveedor/info-proveedor.component';
+import { AgregarCargaComponent } from './components/cargas/agregar-carga/agregar-carga.component';
+import { SeccionAdminComponent } from './components/seccion-admin/seccion-admin.component';
+import { CuentasCobrarComponent } from './components/seccionAdmin/cuentas-cobrar/cuentas-cobrar.component';
+import { CuentasPagarComponent } from './components/seccionAdmin/cuentas-pagar/cuentas-pagar.component';
+import { LoginComponent } from './components/login/login.component';
+import { InfoOrdenesComponent } from './components/ordenes/info-ordenes/info-ordenes.component';
+import { InfoCargasComponent } from './components/cargas/info-cargas/info-cargas.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +51,15 @@ import { AgregarOrdenComponent } from './components/ordenes/agregar-orden/agrega
     ProveedoresComponent,
     AgregarProveedoresComponent,
     OrdenesComponent,
-    AgregarOrdenComponent
+    AgregarOrdenComponent,
+    InfoProveedorComponent,
+    AgregarCargaComponent,
+    SeccionAdminComponent,
+    CuentasCobrarComponent,
+    CuentasPagarComponent,
+    LoginComponent,
+    InfoOrdenesComponent,
+    InfoCargasComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,206 @@
+<h2 class="ml"> <button routerLink="/cargas" class="btn btn-primary mr">
+    <i class="fa fa-arrow-left"></i>
+  </button> {{edit ? 'Editar Carga' : 'Alta de Carga'}}</h2>
+<form #clienteForm="ngForm" [formGroup]="addCarga" (ngSubmit)="onSubmit()">
+  <hr />
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="cliente">Proveedor</label>
+      <select formControlName="idProveedor" id="proveedor" class="form-control" name="proveedor">
+        <option selected value="">Elige un proveedor...</option>
+        <option *ngFor="let proveedor of proveedores" [value]="proveedor.idProveedor">{{ proveedor?.nombre }}</option>
+      </select>
+      <p *ngIf="submitted && addCarga.controls['idProveedor'].errors?.required" class="error" role="alert">Proveedor
+        no puede
+        estar vacio</p>
+    </div>
+    <div class="form-group col-md-6">
+      <label for="ordenes">Numero de Ordenes</label>
+      <select formControlName="idPO" id="ordenes" class="form-control" name="ordenes">
+        <option selected value="">Elige una orden...</option>
+        <option *ngFor="let orden of ordenes" [value]="orden.idPO">{{ orden?.PONumber }}</option>
+      </select>
+      <p *ngIf="submitted && addCarga.controls['idPO'].errors?.required" class="error" role="alert">Ordenes no
+        puede
+        estar vacio</p>
+    </div>
+    <div class="form-group col-md-6">
+      <label for="peso">Peso</label>
+      <input name="peso" formControlName="peso" type="text" class="form-control" id="peso" placeholder="peso" />
+      <p *ngIf="submitted && addCarga.controls['peso'].errors?.required" class="error" role="alert">Peso
+        no
+        puede estar vacio</p>
+    </div>
+    <div class="form-group col-md-6">
+      <label for="numeroCajas">Numero de cajas</label>
+      <input name="numeroCajas" formControlName="numCajas" type="text" class="form-control" id="numeroCajas"
+        placeholder="Numero de cajas" />
+      <p *ngIf="submitted && addCarga.controls['numCajas'].errors?.required" class="error" role="alert">Numero de cajas
+        no puede
+        estar vacio</p>
+    </div>
+    <div class="form-group col-md-6">
+      <label for="numeroPallets">Numero de Pallets</label>
+      <input name="numeroPallets" formControlName="numPallets" type="text" class="form-control" id="numeroPallets"
+        placeholder="Numero de Pallets" />
+      <p *ngIf="submitted && addCarga.controls['numPallets'].errors?.required" class="error" role="alert">Numero de
+        pallets no puede
+        estar vacio</p>
+    </div>
+    <div class="form-group col-md-6">
+      <label for="Temperatura">Temperatura</label>
+      <input name="Temperatura" formControlName="temperatura" type="text" class="form-control" id="Temperatura"
+        placeholder="Numero de Pallets" />
+      <p *ngIf="submitted && addCarga.controls['temperatura'].errors?.required" class="error" role="alert">Temperatura
+        no puede
+        estar vacio</p>
+    </div>
+    <div class="form-group col-md-6">
+      <label for="fecha Descarga">Fecha de Descarga</label>
+      <input type="text" placeholder="Fecha de descarga" formControlName="fechaDescarga" class="form-control"
+        bsDatepicker [bsConfig]="{ adaptivePosition: true }">
+      <p *ngIf="submitted && addCarga.controls['fechaDescarga'].errors?.required" class="error" role="alert">
+        Fecha de descarga no puede estar vacio</p>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="precioCliente">Precio Cliente</label>
+      <input name="precioCliente" formControlName="precioCliente" type="text" class="form-control" id="precioCliente"
+        placeholder="Precio Cliente" />
+      <p *ngIf="submitted && addCarga.controls['precioCliente'].errors?.required" class="error" role="alert">
+        Precio Cliente no
+        puede estar vacio</p>
+    </div>
+    <div class="form-group col-md-6">
+      <label for="costoProveedor">Costo Proveedor</label>
+      <input name="costoProveedor" formControlName="costoProveedor" type="text" class="form-control" id="costoProveedor"
+        placeholder="Costo Proveedor" />
+      <p *ngIf="submitted && addCarga.controls['costoProveedor'].errors?.required" class="error" role="alert">Costo
+        Proveedor
+        no puede estar vacio</p>
+    </div>
+    <div class="form-group col-md-6">
+      <label for="estatusCarga">Estatus de Carga</label>
+      <input name="estatusCarga" formControlName="estatusCarga" type="text" class="form-control" id="estatusCarga"
+        placeholder="Estatus Carga" />
+      <p *ngIf="submitted && addCarga.controls['estatusCarga'].errors?.required" class="error" role="alert">Estatus
+        Carga
+        no puede estar vacio</p>
+    </div>
+    <div class="form-group col-md-6">
+      <label for="estatusPago">Estatus de Pago cliente</label>
+      <select formControlName="estatusPago" id="estatuscliente" class="form-control" name="estatuscliente">
+          <option selected value="">Elige un status...</option>
+          <option >Pendiente</option>
+          <option >Pagada</option>
+        </select>
+      <p *ngIf="submitted && addCarga.controls['estatusPago'].errors?.required" class="error" role="alert">Estatus Pago
+        no puede estar vacio</p>
+    </div>
+    <div class="form-group col-md-6">
+      <label for="estatusPagoProveedor">Estatus de Pago Proveedor</label>
+      <select formControlName="estatusPagoProveedor" id="estatusproveedor" class="form-control" name="estatuscliente">
+          <option selected value="">Elige un status...</option>
+          <option >Pendiente</option>
+          <option >Pagada</option>
+        </select>
+      <p *ngIf="submitted && addCarga.controls['estatusPagoProveedor'].errors?.required" class="error" role="alert">Estatus Pago Proveedor
+        no puede estar vacio</p>
+    </div>
+    <div class="form-group col-md-6">
+      <label for="comisionBroker">Comision Broker</label>
+      <input name="comisionBroker" formControlName="comisionBroker" type="text" class="form-control" id="comisionBroker"
+        placeholder="Comision Broker" />
+      <p *ngIf="submitted && addCarga.controls['comisionBroker'].errors?.required" class="error" role="alert">Comision
+        Broker
+        no puede estar vacio</p>
+    </div>
+    <div class="form-group col-md-6">
+      <label for="metodoPago">Metodo de Pago</label>
+      <input name="metodoPago" formControlName="metodoPago" type="text" class="form-control" id="metodoPago"
+        placeholder="Metodo de Pago" />
+      <p *ngIf="submitted && addCarga.controls['metodoPago'].errors?.required" class="error" role="alert">Metodo de Pago
+        no puede estar vacio</p>
+    </div>
+    <div class="form-group col-md-6">
+      <label for="agenciaAduanal">Agencia Aduanal</label>
+      <select formControlName="idAgenciaAduanal" id="agenciaAduanal" class="form-control" name="agenciaAduanal">
+        <option selected value="">Elige una Agencia Aduanal...</option>
+        <option *ngFor="let agenciaAduanal of agenciaAduanales" [value]="agenciaAduanal.idAgenciaAduanal">{{ agenciaAduanal?.nombre }}</option>
+      </select>
+      <p *ngIf="submitted && addCarga.controls['idAgenciaAduanal'].errors?.required" class="error" role="alert">Agencia Aduanal
+        no puede
+        estar vacio</p>
+    </div>
+    <div class="form-group col-md-6">
+        <label for="placasTractor">Placas Tractor</label>
+        <input name="placasTractor" formControlName="placasTractor" type="text" class="form-control" id="placasTractor"
+          placeholder="Placas Tractor" />
+        <p *ngIf="submitted && addCarga.controls['placasTractor'].errors?.required" class="error" role="alert">Placas Tractor
+          no puede estar vacio</p>
+      </div>
+    <div class="form-group col-md-6">
+        <label for="ecoTractor">Eco Tractor</label>
+        <input name="ecoTractor" formControlName="ecoTractor" type="text" class="form-control" id="ecoTractor"
+          placeholder="Eco Tractor" />
+        <p *ngIf="submitted && addCarga.controls['ecoTractor'].errors?.required" class="error" role="alert">Eco Tractor
+          no puede estar vacio</p>
+      </div>
+    <div class="form-group col-md-6">
+        <label for="codigoAlpha">Codigo Alpha</label>
+        <input name="codigoAlpha" formControlName="codigoAlpha" type="text" class="form-control" id="codigoAlpha"
+          placeholder="codigo Alpha" />
+        <p *ngIf="submitted && addCarga.controls['codigoAlpha'].errors?.required" class="error" role="alert">Codigo Alpha
+          no puede estar vacio</p>
+      </div>
+    <div class="form-group col-md-6">
+        <label for="caat">Caat</label>
+        <input name="caat" formControlName="caat" type="text" class="form-control" id="caat"
+          placeholder="caat" />
+        <p *ngIf="submitted && addCarga.controls['caat'].errors?.required" class="error" role="alert">Caat
+          no puede estar vacio</p>
+      </div>
+    <div class="form-group col-md-6">
+        <label for="ecoThermo">ecoThermo</label>
+        <input name="ecoThermo" formControlName="ecoThermo" type="text" class="form-control" id="ecoThermo"
+          placeholder="ecoThermo" />
+        <p *ngIf="submitted && addCarga.controls['ecoThermo'].errors?.required" class="error" role="alert">Eco Thermo
+          no puede estar vacio</p>
+      </div>
+    <div class="form-group col-md-6">
+        <label for="placas">Placas</label>
+        <input name="placas" formControlName="placas" type="text" class="form-control" id="placas"
+          placeholder="placas" />
+        <p *ngIf="submitted && addCarga.controls['placas'].errors?.required" class="error" role="alert">Placas
+          no puede estar vacio</p>
+      </div>
+    <div class="form-group col-md-6">
+        <label for="pies">Pies</label>
+        <input name="pies" formControlName="pies" type="text" class="form-control" id="pies"
+          placeholder="pies" />
+        <p *ngIf="submitted && addCarga.controls['pies'].errors?.required" class="error" role="alert">Placas
+          no puede estar vacio</p>
+      </div>
+    <div class="form-group col-md-6">
+        <label for="nombreOperador">Nombre de Operador</label>
+        <input name="nombreOperador" formControlName="nombreOperador" type="text" class="form-control" id="nombreoperador"
+          placeholder="Nombre de Operador" />
+        <p *ngIf="submitted && addCarga.controls['nombreOperador'].errors?.required" class="error" role="alert">Nombre de Operador
+          no puede estar vacio</p>
+      </div>
+    <div class="form-group col-md-6">
+        <label for="numeroOperador">Numero de Operador</label>
+        <input name="numeroOperador" formControlName="numOperador" type="text" class="form-control" id="numerooperador"
+          placeholder="Numero de Operador" />
+        <p *ngIf="submitted && addCarga.controls['numOperador'].errors?.required" class="error" role="alert">Numero de Operador
+          no puede estar vacio</p>
+      </div>
+  </div>
+
+  <div class="col-md-12">
+    <button type="submit" class="btn btn-success">
+      Guardar
+    </button>
+  </div>
+</form>

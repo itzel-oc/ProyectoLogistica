@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CountriesService } from 'src/app/services/countries.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProveedoresService } from 'src/app/services/proveedores.service';
 import { Proveedor } from 'src/app/classes/proveedor';
@@ -27,8 +27,9 @@ export class AgregarProveedoresComponent implements OnInit {
   public buttonName: any = 'Show';
   addProveedor: FormGroup;
   rutas: IRuta[];
+  inner = [''];
 
-  proveedorModel = new Proveedor(0, 0, '', '', '', '', '', '', '', '', '', '', 0, 0);
+  proveedorModel = new Proveedor(0, 0, [], '', '', '', '', '', '', '', '', '', '', 0, 0);
   datosBancariosModel = new DatosBancarios(0, 0, 0, '', '', '', '', '', '', '', '', '', '');
   estadosMexico: string[];
   estadosUsa: string[];
@@ -48,12 +49,27 @@ export class AgregarProveedoresComponent implements OnInit {
     }
   }
 
+
+  addRuta() {
+    this.inner.push('');
+    this.addProveedor.addControl(`idRuta${this.inner.length - 1}`, new FormControl(''));
+    this.addProveedor.controls[`idRuta${this.inner.length - 1}`].setValue('');
+    this.addProveedor.controls[`idRuta${this.inner.length - 1}`].setValidators([Validators.required]);
+    this.addProveedor.controls[`idRuta${this.inner.length - 1}`].updateValueAndValidity();
+  }
+
+  substractRuta(index) {
+    this.inner.splice(index, 1);
+    this.addProveedor.removeControl(`idRuta${index}`);
+    this.addProveedor.updateValueAndValidity();
+  }
+
   updateProveedor() {
+
     this._proveedorService
       .updateProveedor(this.proveedorModel.idProveedor, this.proveedorModel)
       .subscribe(
         res => {
-          console.log(res);
           this.router.navigate(['/proveedores']);
         },
         error => {
@@ -65,12 +81,19 @@ export class AgregarProveedoresComponent implements OnInit {
   onSubmit() {
     this.submitted = true;
     if (this.addProveedor.status === 'VALID') {
+      this.inner.forEach((values, index) => {
+        this.proveedorModel.rutas.push(this.addProveedor.value['idRuta'+index]);
+      });
       this.proveedorModel = {...this.proveedorModel, ...this.addProveedor.value};
       if (!this.edit) {
         this._proveedorService
           .insertProveedor(this.proveedorModel)
           .subscribe(data => this.router.navigate(["/proveedores"]));
       } else {
+        this.proveedorModel.rutas = [];
+        this.inner.forEach((values, index) => {
+          this.proveedorModel.rutas.push(this.addProveedor.value['idRuta'+index]);
+        });
         this.updateProveedor();
       }
     }
@@ -84,19 +107,19 @@ export class AgregarProveedoresComponent implements OnInit {
     const params = this.route.snapshot.params;
     this._rutas.getAllRutas().subscribe((ruta) => this.rutas = ruta);
     this.addProveedor = this.formBuilder.group({
-      idRuta: ['', Validators.required],
-      nombre: [null, [Validators.required]],
-      RFC: [null, Validators.required],
-      contacto: [null, Validators.required],
-      email: [null, [Validators.required, Validators.email]],
-      telefono: [null, [Validators.required, Validators.pattern("^[0-9]*$")]],
-      pais: ['', Validators.required],
-      estado: ['', Validators.required],
-      ciudad: [null, Validators.required],
-      direccion: [null, Validators.required],
-      CP: [null, Validators.required],
-      diasCredito: [null, Validators.required],
-      limiteCredito: [null, Validators.required],
+      idRuta0: ['', Validators.required],
+      nombre: [null, Validators.required],
+      RFC: [null],
+      contacto: [null],
+      email: [null, [Validators.email]],
+      telefono: [null, [Validators.pattern("^[0-9]*$")]],
+      pais: [''],
+      estado: [''],
+      ciudad: [null],
+      direccion: [null],
+      CP: [null],
+      diasCredito: [null],
+      limiteCredito: [null],
       DatosBancarios: this.formBuilder.group({
         banco: [null],
         cuenta: [''],
@@ -113,21 +136,22 @@ export class AgregarProveedoresComponent implements OnInit {
       this._proveedorService.getProveedor(params.idProveedor).subscribe(
         res => {
           this.proveedorModel = {...res};
+          this.inner = [...res.rutas];
           this.edit = true;
           this.addProveedor = this.formBuilder.group({
-            idRuta: [this.proveedorModel.idRuta, [Validators.required]],
-            nombre: [this.proveedorModel.nombre, [Validators.required]],
-            RFC: [this.proveedorModel.RFC, Validators.required],
-            contacto: [this.proveedorModel.contacto, Validators.required],
-            email: [this.proveedorModel.email, [Validators.required, Validators.email]],
-            telefono: [this.proveedorModel.telefono, [Validators.required, Validators.pattern("^[0-9]*$")]],
-            pais: [this.proveedorModel.pais, Validators.required],
-            estado: [this.proveedorModel.estado, Validators.required],
-            ciudad: [this.proveedorModel.ciudad, Validators.required],
-            direccion: [this.proveedorModel.direccion, Validators.required],
-            CP: [this.proveedorModel.CP, Validators.required],
-            diasCredito: [this.proveedorModel.diasCredito, Validators.required],
-            limiteCredito: [this.proveedorModel.limiteCredito, Validators.required],
+            idRuta0: [this.proveedorModel.rutas[0], Validators.required],
+            nombre: [this.proveedorModel.nombre, Validators.required],
+            RFC: [this.proveedorModel.RFC],
+            contacto: [this.proveedorModel.contacto],
+            email: [this.proveedorModel.email, [Validators.email]],
+            telefono: [this.proveedorModel.telefono, [Validators.pattern("^[0-9]*$")]],
+            pais: [this.proveedorModel.pais],
+            estado: [this.proveedorModel.estado],
+            ciudad: [this.proveedorModel.ciudad],
+            direccion: [this.proveedorModel.direccion],
+            CP: [this.proveedorModel.CP],
+            diasCredito: [this.proveedorModel.diasCredito],
+            limiteCredito: [this.proveedorModel.limiteCredito],
             DatosBancarios: this.formBuilder.group({
               banco: [this.proveedorModel.DatosBancarios.length > 0 ? this.proveedorModel.DatosBancarios[0].banco : null],
               cuenta: [this.proveedorModel.DatosBancarios.length > 0 ? this.proveedorModel.DatosBancarios[0].cuenta : null],
@@ -139,7 +163,15 @@ export class AgregarProveedoresComponent implements OnInit {
               estado: [this.proveedorModel.DatosBancarios.length > 0 ? this.proveedorModel.DatosBancarios[0].estado : null],
               pais: [this.proveedorModel.DatosBancarios.length > 0 ? this.proveedorModel.DatosBancarios[0].pais : null]
             })
-          })
+          });
+          this.inner.forEach((values, index) => {
+            if (index !== 0) {
+              this.addProveedor.addControl(`idRuta${index}`, new FormControl(''));
+              this.addProveedor.controls[`idRuta${index}`].setValue(values);
+              this.addProveedor.controls[`idRuta${index}`].setValidators([Validators.required]);
+              this.addProveedor.controls[`idRuta${index}`].updateValueAndValidity();
+            }
+          });
         },
         error => console.log(error)
       );

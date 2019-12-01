@@ -3,8 +3,8 @@
     </button> {{edit ? 'Editar Orden' : 'Alta de Orden'}}</h2>
 <form #clienteForm="ngForm" [formGroup]="addOrden" (ngSubmit)="onSubmit()">
     <hr />
-    <div class="form-row">
-        <div class="form-group col-md-6">
+    <div class="row">
+        <div class="form-group col-md-4">
             <label for="producto">Producto</label>
             <input name="producto" formControlName="producto" type="text" class="form-control" id="producto"
                 placeholder="Producto" />
@@ -12,7 +12,15 @@
                 no
                 puede estar vacio</p>
         </div>
-        <div class="form-group col-md-6">
+        <div class="form-group col-md-4">
+            <label for="PO#">Numero de Orden de Producto</label>
+            <input name="PO#" formControlName="PONumber" type="text" class="form-control" id="PO#"
+                placeholder="Numero Orden Producto" />
+            <p *ngIf="submitted && addOrden.controls['PONumber'].errors?.required" class="error" role="alert">Numero de Orden de Producto
+                no
+                puede estar vacio</p>
+        </div>
+        <div class="form-group col-md-4">
             <label for="cliente">Cliente</label>
             <select formControlName="idCliente" id="cliente" class="form-control" name="cliente">
                 <option selected value="">Elige un cliente...</option>
@@ -52,16 +60,16 @@
                 Fecha de carga no puede estar vacio</p>
         </div>
     </div>
-    <div class="form-row">
+    <div class="row">
         <div class="form-group col-md-6">
-            <label for="origen">Direccion de Origen</label>
+            <label for="origen" class="mt">Direccion de Origen</label>
             <input name="ciudad" formControlName="direccionOrigen" type="text" class="form-control" id="origen"
                 placeholder="Direccion de Origen" />
             <p *ngIf="submitted && addOrden.controls['direccionOrigen'].errors?.required" class="error" role="alert">
                 Direccion de Origen no
                 puede estar vacio</p>
         </div>
-        <div class="form-group col-md-6">
+        <div class="form-group col-md-6" style="line-height: 2.1;">
             <label for="destino">Dirección de Destino</label>
             <input name="destino" formControlName="direccionDestino" type="text" class="form-control" id="destino"
                 placeholder="Direccion de Destino"/>

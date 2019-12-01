@@ -2,6 +2,7 @@ export class Proveedor {
   constructor(
     public idProveedor: number,
     public idRuta: number,
+    public rutas: any[],
     public nombre: string,
     public RFC: string,
     public contacto: string,

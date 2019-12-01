@@ -1,0 +1,49 @@
+<hr />
+<h3><button [routerLink]="['/proveedores']" class="btn btn-primary"><i class="fa fa-arrow-left"></i></button> Datos del
+  Proveedor</h3>
+<hr />
+<div class="view-flex">
+  <p class="titulo">Nombre:</p>
+  <p class="ml">{{ proveedor.nombre }}</p>
+</div>
+<div class="view-flex">
+  <p class="titulo">RFC:</p>
+  <p class="ml">{{ proveedor.RFC }}</p>
+</div>
+<div class="view-flex">
+  <p class="titulo">Contacto Principal:</p>
+  <p class="ml">{{ proveedor.contacto }}</p>
+</div>
+<div class="view-flex">
+  <p class="titulo">Email:</p>
+  <p class="ml">{{ proveedor.email }}</p>
+</div>
+<div class="view-flex">
+  <p class="titulo">Telefono:</p>
+  <p class="ml" *ngIf="proveedor.telefono">{{ proveedor.telefono | lada: proveedor.pais}}</p>
+  <p class="ml" *ngIf="!proveedor.telefono"></p>
+</div>
+<div class="view-flex">
+  <p class="titulo">Direccion:</p>
+  <p class="ml">{{ proveedor.direccion }}</p>
+</div>
+<div class="view-flex">
+  <p class="titulo">Ciudad:</p>
+  <p class="ml">{{ proveedor.ciudad }}</p>
+</div>
+<div class="view-flex">
+  <p class="titulo">Estado:</p>
+  <p class="ml">{{ proveedor.estado }}</p>
+</div>
+<div class="view-flex">
+  <p class="titulo">País:</p>
+  <p class="ml">{{ proveedor.pais }}</p>
+</div>
+<div class="view-flex">
+  <p class="titulo">Días de Credito:</p>
+  <p class="ml">{{ proveedor.diasCredito }}</p>
+</div>
+<div class="view-flex">
+  <p class="titulo">Limite de Credito:</p>
+  <p class="ml">{{ proveedor.limiteCredito | currency }}</p>
+</div>

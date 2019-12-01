@@ -20,7 +20,8 @@
         <td>{{ cliente.direccion }}</td>
         <td>{{ cliente.CP }}</td>
         <td>{{ cliente.RFC }}</td>
-        <td>{{ cliente.telefono | lada: cliente.pais}}</td>
+        <td *ngIf="cliente.telefono">{{ cliente.telefono | lada: cliente.pais}}</td>
+        <td *ngIf="!cliente.telefono"></td>
         <td>{{ cliente.diasCredito }}</td>
         <td>{{ cliente.createdAt | date: "dd-MM-yyyy" }}</td>
         <button

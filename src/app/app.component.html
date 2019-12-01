@@ -1,5 +1,10 @@
-<app-header></app-header>
-<app-menu></app-menu>
-<app-content></app-content>
-<app-footer></app-footer>
-<app-settings></app-settings>
+<ng-container *ngIf="!token">
+    <app-login></app-login>
+</ng-container>
+<ng-container *ngIf="token">
+    <app-header></app-header>
+    <app-menu></app-menu>
+    <app-content></app-content>
+    <app-footer></app-footer>
+    <app-settings></app-settings>
+</ng-container>

@@ -1,0 +1,18 @@
+<div class="container fullheight">
+    <h1 class="login-title">Blas Logistica</h1>
+    <form (ngSubmit)="onSubmit()" [formGroup]="account" class="login-container">
+        <div class="form-group col-md-12 flex-inputs">
+            <label class="login-text" for="usuario">Usuario</label>
+            <input type="text" formControlName="username">
+            <p class="login-text" *ngIf="submitted && account.controls['username'].errors?.required" role="alert">usuario no puede estar vacio</p>
+        </div>
+        <div class="form-group col-md-12 flex-inputs">
+            <label class="login-text" for="password">Password</label>
+            <input type="password" formControlName="password">
+            <p class="login-text" *ngIf="submitted && account.controls['password'].errors?.required" role="alert">password no puede estar vacio</p>
+        </div>
+        <div class="col-md-12">
+            <button type="submit" class="btn btn-success">Login</button>
+        </div>
+    </form>
+</div>

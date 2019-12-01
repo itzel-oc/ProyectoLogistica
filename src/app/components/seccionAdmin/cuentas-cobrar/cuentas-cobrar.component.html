@@ -1,0 +1,83 @@
+<h2>Cuentas Por Cobrar</h2>
+<div class="table-responsive">
+  <table class="table table-striped table-bordered" style="width:100%" *ngIf="cargas.length > 0; else nonecargas">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col"></th>
+        <th scope="col">Costo Proveedor</th>
+        <th scope="col">Estatus Pago a Proveedor</th>
+        <th scope="col">Costo Cliente</th>
+        <th scope="col">Estatus Pago Cliente</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let carga of cargas; let index = index">
+        <td>Factura {{ carga.idCarga }}</td>
+        <td>{{ carga.costoProveedor | currency}}</td>
+        <td>{{ carga.estatusPagoProveedor }}</td>
+        <td>{{ carga.precioCliente | currency }}</td>
+        <td>{{ carga.estatusPago }}</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="col-md-12" *ngIf="cargas.length > 0">
+    <div class="col-md-6">
+      <h4>Cuentas por pagar</h4>
+      <p>{{ cuentasPorPagar | currency}}</p>
+    </div>
+    <div class="col-md-6">
+      <h4>Cuentas por cobrar</h4>
+      <p>{{ cuentasPorCobrar | currency}}</p>
+    </div>
+  </div>
+  <div class="col-md-12" *ngIf="adeudoProveedores.length > 0">
+    <h4>Adeudos Proveedor</h4>
+    <table class="table table-striped table-bordered" style="width:100%" *ngIf="cargas.length > 0; else nonecargas">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Proveedor</th>
+            <th scope="col">Costo Proveedor</th>
+            <th scope="col">Estatus Pago a Proveedor</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let adeudoProveedor of adeudoProveedores; let index = index">
+            <td>Proveedor: {{ adeudoProveedor.proveedor.nombre }}</td>
+            <td>{{ adeudoProveedor.costoProveedor | currency}}</td>
+            <td>{{ adeudoProveedor.estatusPagoProveedor }}</td>
+          </tr>
+        </tbody>
+      </table>
+  </div>
+  <div class="col-md-12" *ngIf="adeudoClientes.length > 0">
+    <h4>Adeudos Cliente</h4>
+    <table class="table table-striped table-bordered" style="width:100%" *ngIf="cargas.length > 0; else nonecargas">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Cliente</th>
+            <th scope="col">Costo Cliente</th>
+            <th scope="col">Estatus Pago a Cliente</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let adeudoCliente of adeudoClientes; let index = index">
+            <td>Cliente: {{ adeudoCliente.cliente.nombre }}</td>
+            <td>{{ adeudoCliente.precioCliente | currency}}</td>
+            <td>{{ adeudoCliente.estatusPago }}</td>
+          </tr>
+        </tbody>
+      </table>
+  </div>
+  <div class="col-md-12" *ngIf="cargas.length > 0">
+    <h4>Total Facturado</h4>
+    <div class="col-md-6">
+      <p>{{ totalPagoProveedor | currency }}</p>
+    </div>
+    <div class="col-md-6">
+      <p>{{ totalPagoCliente | currency }}</p>
+    </div>
+  </div>
+  <ng-template #nonecargas>
+    <h1 class="text-center">No existen Cuentas por cobrar</h1>
+  </ng-template>
+</div>
